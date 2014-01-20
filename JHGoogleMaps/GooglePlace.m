@@ -10,4 +10,9 @@
 
 @implementation GooglePlace
 
+-(CLLocation *)location
+{
+    return [[CLLocation alloc] initWithLatitude:self.placeLat longitude:self.placeLng];
+}
+
 @end

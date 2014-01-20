@@ -58,7 +58,7 @@
     [manager GET:paramsString
       parameters:nil
          success:^(AFHTTPRequestOperation *operation, id responseObject) {
-             NSLog(@"success:%@", responseObject);
+//             NSLog(@"success:%@", responseObject);
              NSDictionary *placesResultsDict = (NSDictionary*)responseObject;
              NSString *status = placesResultsDict[@"status"];
              if ([status isEqualToString:@"ZERO_RESULTS"]) {

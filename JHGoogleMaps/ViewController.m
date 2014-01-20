@@ -10,6 +10,7 @@
 #import "MDDirectionService.h"
 #import "AppDelegate.h"
 #import "GooglePlacesSearcher.h"
+#import "GooglePlace.h"
 
 @interface ViewController () <GMSMapViewDelegate, UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) NSMutableArray *waypoints;
@@ -131,21 +132,13 @@
 
 -(void)addDirections:(NSDictionary *)json
 {
-//    NSLog(@"addDirections:%@", json);
     NSDictionary *firstRoute = json[@"routes"][0];
     NSArray *firstRouteLegs = firstRoute[@"legs"];
-    NSLog(@"firstRouteLegs(%d): %@", firstRouteLegs.count, firstRouteLegs);
+//    NSLog(@"firstRouteLegs(%d): %@", firstRouteLegs.count, firstRouteLegs);
     float routeStartLat = [firstRoute[@"legs"][0][@"start_location"][@"lat"] floatValue];
     float routeStartLng = [firstRoute[@"legs"][0][@"start_location"][@"lng"] floatValue];
     float routeEndLat = [firstRoute[@"legs"][0][@"end_location"][@"lat"] floatValue];
     float routeEndLng = [firstRoute[@"legs"][0][@"end_location"][@"lng"] floatValue];
-//    CLLocationCoordinate2D start = CLLocationCoordinate2DMake(routeStartLat, routeStartLng);
-//    CLLocationCoordinate2D end = CLLocationCoordinate2DMake(routeEndLat, routeEndLng);
-//    float absChangeInLat = ABS((float)end.latitude - (float)start.latitude);
-//    float changeInLatInMeters = absChangeInLat * 111120.0; //*111.12
-//    float absChangeInLng = ABS((float)end.longitude - (float)start.longitude);
-//    float changeInLngInMeters = absChangeInLng * 111120.0; //*111.12
-//    float slope = (changeInLatInMeters) / (changeInLngInMeters);
     
     float x1 = routeStartLat;
     float y1 = routeStartLng;
@@ -159,8 +152,12 @@
     float searchRadius = 2000.f;
     float searchCircleNumber = ceilf(totalDistanceValue/(2.0*searchRadius));
     for (float j=0; j<searchCircleNumber; j++) {
+//        GooglePlace *place = [[GooglePlace alloc] init];
         float currentLaty = x1 + ((x2 - x1)/(j+1))*j;
         float currentLngy = y1 + ((y2 - y1)/(j+1))*j;
+//        place.placeLat = currentLaty;
+//        place.placeLng = currentLngy;
+//        [self.googlePlacesArray addObject:place];
         CLLocationCoordinate2D currentCoord = CLLocationCoordinate2DMake(currentLaty, currentLngy);
         NSString *searchTerm = @"coffee";
         NSLog(@"about to search (%@) lat(%f) lng(%f)", searchTerm, currentCoord.latitude, currentCoord.longitude);
@@ -184,43 +181,11 @@
         NSLog(@"distance:%@", leg[@"distance"][@"text"]);
         float distanceValue = [leg[@"distance"][@"value"] floatValue]; // meters
         float distanceTime = [leg[@"duration"][@"value"] floatValue]; // seconds
-//        float startLocationLat = [leg[@"start_location"][@"lat"] floatValue];
-//        float startLocationLng = [leg[@"start_location"][@"lng"] floatValue];
-//        float endLocationLat = [leg[@"end_location"][@"lat"] floatValue];
-//        float endLocationLng = [leg[@"end_location"][@"lng"] floatValue];
         totalDistance += distanceValue;
         totalTime += distanceTime;
         NSLog(@"time:%@", leg[@"duration"][@"text"]);
         NSLog(@"instructions:%@", leg[@"html_instructions"]);
         NSLog(@"-------step %d--------", i+1);
-        
-//        NSString *searchTerm = @"coffee";
-//        // do a google place search with coord and term
-//        if (i == 0) {
-//            CLLocationCoordinate2D legStartCoord = CLLocationCoordinate2DMake(startLocationLat, startLocationLng);
-//            [GooglePlacesSearcher searchKeyword:searchTerm
-//                                          atLat:legStartCoord.latitude
-//                                            lng:legStartCoord.longitude
-//                                        success:^(NSArray *results) {
-//                                            dispatch_async(dispatch_get_main_queue(), ^{
-//                                                [self reloadPlacesArrayLocations:results];
-//                                            });
-//                                        } failure:^(NSError *error) {
-//                                            NSLog(@"error1: %@", error.localizedDescription);
-//                                        }];
-//        }
-//        CLLocationCoordinate2D legEndCoord = CLLocationCoordinate2DMake(endLocationLat, endLocationLng);
-//        [GooglePlacesSearcher searchKeyword:searchTerm
-//                                      atLat:legEndCoord.latitude
-//                                        lng:legEndCoord.longitude
-//                                    success:^(NSArray *results) {
-//                                        dispatch_async(dispatch_get_main_queue(), ^{
-//                                            [self reloadPlacesArrayLocations:results];
-//                                        });
-//                                    } failure:^(NSError *error) {
-//                                        NSLog(@"error2: %@", error.localizedDescription);
-//                                    }];
-//        i += 1;
     }
     
     NSLog(@"firstRoute Leg Steps(%d)", steps.count);
@@ -239,14 +204,12 @@
 
 -(void)reloadPlacesArrayLocations:(NSArray*)places
 {
-//    NSArray *currentPlacesArrayCopy = [self.placesArray copy];
     NSLog(@"adding %d places", places.count);
     NSArray *newPlacesArrayCopy = [places copy];
-//    [self.placesArray addObjectsFromArray:places];
     NSLog(@"placesArray count: (%d)", MY_APP_DELEGATE.mainPlacesArray.count);
     // add new place pins to map
     for (NSDictionary *place in newPlacesArrayCopy) {
-        NSLog(@"place:%@", place);
+//        NSLog(@"place:%@", place);
         if ([MY_APP_DELEGATE mainPlacesContainsPlaceWithID:place[@"id"]]) {
             // don't add
             NSLog(@"don't add %@", place[@"name"]);
@@ -266,6 +229,19 @@
         NSArray *types = place[@"types"];
         NSString *iconURL = place[@"icon"];
         NSString *placeID = place[@"id"];
+        
+        GooglePlace *gPlace = [[GooglePlace alloc] init];
+        gPlace.placeLat = markerLat;
+        gPlace.placeLng = markerLng;
+        gPlace.rating = rating;
+        gPlace.types = types;
+        gPlace.iconURL = iconURL;
+        gPlace.placeID = placeID;
+        gPlace.placeOpacity = marker.opacity;
+        gPlace.placeTitle = marker.title;
+        gPlace.placeSubtitle = marker.snippet;
+        [self.googlePlacesArray addObject:gPlace];
+        
         marker.map = self.mapView;
     }
     [self.tableView reloadData];

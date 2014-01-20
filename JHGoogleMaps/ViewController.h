@@ -13,6 +13,7 @@
 
 @property (strong, nonatomic) GMSMapView *mapView;
 @property (strong, nonatomic) UITableView *tableView;
+@property (strong, nonatomic) NSMutableArray *googlePlacesArray;
 //@property (strong, nonatomic) NSMutableArray *placesArray;
 
 @end

@@ -15,8 +15,10 @@
 
 #define START_LAT @(35.9409076)
 #define START_LNG @(-78.863088)
-#define END_LAT @(36.002767)
-#define END_LNG @(-78.904096)
+//#define END_LAT @(36.002767) // Popup HQ
+//#define END_LNG @(-78.904096)
+#define END_LAT @(35.816264) // Manor Six Forks
+#define END_LNG @(-78.614673)
 
 #define GOOGLE_PLACES_API_BASE_URL @"https://maps.googleapis.com/maps/api/place/nearbysearch/json"
 #define GOOGLE_DIRECTIONS_API_BASE_URL @"http://maps.googleapis.com/maps/api/directions/json?"
