@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  MapViewController.h
 //  JHGoogleMaps
 //
 //  Created by Jason Humphries on 1/17/14.
@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <GoogleMaps/GoogleMaps.h>
 
-@interface ViewController : UIViewController
+@interface MapViewController : UIViewController
 
 @property (strong, nonatomic) GMSMapView *mapView;
 @property (strong, nonatomic) UITableView *tableView;

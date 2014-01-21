@@ -14,7 +14,7 @@
 		9677791D1889D2AF007596BA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9677791C1889D2AF007596BA /* main.m */; };
 		967779211889D2AF007596BA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 967779201889D2AF007596BA /* AppDelegate.m */; };
 		967779241889D2AF007596BA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 967779221889D2AF007596BA /* Main.storyboard */; };
-		967779271889D2AF007596BA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 967779261889D2AF007596BA /* ViewController.m */; };
+		967779271889D2AF007596BA /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 967779261889D2AF007596BA /* MapViewController.m */; };
 		967779291889D2AF007596BA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 967779281889D2AF007596BA /* Images.xcassets */; };
 		967779301889D2AF007596BA /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9677792F1889D2AF007596BA /* XCTest.framework */; };
 		967779311889D2AF007596BA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 967779101889D2AE007596BA /* Foundation.framework */; };
@@ -74,8 +74,8 @@
 		9677791F1889D2AF007596BA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		967779201889D2AF007596BA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		967779231889D2AF007596BA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		967779251889D2AF007596BA /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		967779261889D2AF007596BA /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		967779251889D2AF007596BA /* MapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		967779261889D2AF007596BA /* MapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		967779281889D2AF007596BA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		9677792E1889D2AF007596BA /* JHGoogleMapsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JHGoogleMapsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9677792F1889D2AF007596BA /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -274,8 +274,8 @@
 			children = (
 				96777991188A19C4007596BA /* SearchPlacesViewController.h */,
 				96777992188A19C4007596BA /* SearchPlacesViewController.m */,
-				967779251889D2AF007596BA /* ViewController.h */,
-				967779261889D2AF007596BA /* ViewController.m */,
+				967779251889D2AF007596BA /* MapViewController.h */,
+				967779261889D2AF007596BA /* MapViewController.m */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -431,7 +431,7 @@
 				9677798B188A18A0007596BA /* AFNetworkReachabilityManager.m in Sources */,
 				96777990188A18A0007596BA /* AFURLSessionManager.m in Sources */,
 				9677798E188A18A0007596BA /* AFURLRequestSerialization.m in Sources */,
-				967779271889D2AF007596BA /* ViewController.m in Sources */,
+				967779271889D2AF007596BA /* MapViewController.m in Sources */,
 				9677799C188C0EE1007596BA /* GooglePlace.m in Sources */,
 				9677798F188A18A0007596BA /* AFURLResponseSerialization.m in Sources */,
 				967779211889D2AF007596BA /* AppDelegate.m in Sources */,

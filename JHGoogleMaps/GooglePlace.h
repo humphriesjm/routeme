@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
+#import <GoogleMaps/GoogleMaps.h>
 
 @interface GooglePlace : NSObject
 @property (assign, nonatomic) float placeLat;
@@ -20,4 +21,5 @@
 @property (strong, nonatomic) NSString *placeTitle;
 @property (strong, nonatomic) NSString *placeSubtitle;
 @property (assign, nonatomic) float placeOpacity;
+@property (strong, nonatomic) GMSMarker *placeMarker;
 @end

@@ -13,7 +13,7 @@
 #define GOOGLE_MAPS_API_KEY @"AIzaSyBhF3Wx4zluGHMjNfcNHZKWZ6_QKP2OKwg"
 #define GOOGLE_PLACES_API_KEY @"AIzaSyAo0uvnBOcWnCUWzwLYjz-U9wNTpstAXBg"
 
-#define START_LAT @(35.9409076)
+#define START_LAT @(35.9409076) // Colonial Grand
 #define START_LNG @(-78.863088)
 //#define END_LAT @(36.002767) // Popup HQ
 //#define END_LNG @(-78.904096)

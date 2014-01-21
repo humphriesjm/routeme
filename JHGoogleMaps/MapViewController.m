@@ -1,24 +1,24 @@
 //
-//  ViewController.m
+//  MapViewController.m
 //  JHGoogleMaps
 //
 //  Created by Jason Humphries on 1/17/14.
 //  Copyright (c) 2014 Humphries Data Design. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "MapViewController.h"
 #import "MDDirectionService.h"
 #import "AppDelegate.h"
 #import "GooglePlacesSearcher.h"
 #import "GooglePlace.h"
 
-@interface ViewController () <GMSMapViewDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface MapViewController () <GMSMapViewDelegate, UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) NSMutableArray *waypoints;
 @property (strong, nonatomic) NSMutableArray *waypointStrings;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *leftBBI;
 @end
 
-@implementation ViewController
+@implementation MapViewController
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -217,6 +217,9 @@
             NSLog(@"do add %@", place[@"name"]);
             [MY_APP_DELEGATE.mainPlacesArray addObjectsFromArray:places];
         }
+        
+        GooglePlace *gPlace = [[GooglePlace alloc] init];
+        
         GMSMarker *marker = [[GMSMarker alloc] init];
         float markerLat = [place[@"geometry"][@"location"][@"lat"] floatValue];
         float markerLng = [place[@"geometry"][@"location"][@"lng"] floatValue];
@@ -225,24 +228,21 @@
         marker.snippet = place[@"vicinity"];
         marker.icon = [GMSMarker markerImageWithColor:[UIColor blueColor]];
         marker.opacity = 0.9;
-        NSString *rating = place[@"rating"];
-        NSArray *types = place[@"types"];
-        NSString *iconURL = place[@"icon"];
-        NSString *placeID = place[@"id"];
         
-        GooglePlace *gPlace = [[GooglePlace alloc] init];
+        gPlace.placeMarker = marker;
         gPlace.placeLat = markerLat;
         gPlace.placeLng = markerLng;
-        gPlace.rating = rating;
-        gPlace.types = types;
-        gPlace.iconURL = iconURL;
-        gPlace.placeID = placeID;
+        gPlace.rating = place[@"rating"];
+        gPlace.types = place[@"types"];
+        gPlace.iconURL = place[@"icon"];
+        gPlace.placeID = place[@"id"];
         gPlace.placeOpacity = marker.opacity;
         gPlace.placeTitle = marker.title;
         gPlace.placeSubtitle = marker.snippet;
+        gPlace.placeMarker.map = self.mapView;
         [self.googlePlacesArray addObject:gPlace];
         
-        marker.map = self.mapView;
+//        marker.map = self.mapView;
     }
     [self.tableView reloadData];
 }

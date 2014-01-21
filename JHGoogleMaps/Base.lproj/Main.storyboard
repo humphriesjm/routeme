@@ -12,17 +12,17 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="hHt-8v-Mhh"/>
+                        <segue destination="CbK-UC-tCf" kind="relationship" relationship="rootViewController" id="NUt-pz-DFF"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GWl-sM-Ari" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-196" y="131"/>
+            <point key="canvasLocation" x="-384" y="131"/>
         </scene>
-        <!--View Controller - Map-->
+        <!--Map View Controller - Map-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" sceneMemberID="viewController">
+                <viewController id="vXZ-lx-hvc" customClass="MapViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gj7-ar-VBn"/>
                         <viewControllerLayoutGuide type="bottom" id="WAK-IV-SFc"/>
@@ -38,11 +38,7 @@
                                 <action selector="leftBBIAction:" destination="vXZ-lx-hvc" id="Ji5-Fh-ixm"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="9qd-uA-CmA">
-                            <connections>
-                                <segue destination="CbK-UC-tCf" kind="push" id="bGl-ba-ijF"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="9qd-uA-CmA"/>
                     </navigationItem>
                     <connections>
                         <outlet property="leftBBI" destination="5wI-4T-SxU" id="Rxf-Wc-g3x"/>
@@ -50,7 +46,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="255" y="141"/>
+            <point key="canvasLocation" x="535" y="131"/>
         </scene>
         <!--Search Places View Controller - Search-->
         <scene sceneID="ixR-WM-5D5">
@@ -89,11 +85,12 @@
                     <connections>
                         <outlet property="placesTable" destination="rOA-7J-8uN" id="MTy-uN-DWo"/>
                         <outlet property="searchField" destination="Dsr-QD-lPx" id="n9G-z7-keX"/>
+                        <segue destination="vXZ-lx-hvc" kind="push" id="K4G-7A-Bb7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O4e-eb-yl7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="733" y="131"/>
+            <point key="canvasLocation" x="53" y="131"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
