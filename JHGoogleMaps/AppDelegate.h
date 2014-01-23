@@ -30,6 +30,9 @@
 @property (strong, nonatomic) UIWindow *window;
 
 @property (strong, nonatomic) CLLocation *currentLocation;
+@property (strong, nonatomic) CLLocation *startingLocation;
+@property (strong, nonatomic) CLLocation *destinationLocation;
+@property (strong, nonatomic) NSString *keywordSearchString;
 @property (assign, nonatomic) float lat;
 @property (assign, nonatomic) float lng;
 @property (strong, nonatomic) CLLocationManager *locationManager;

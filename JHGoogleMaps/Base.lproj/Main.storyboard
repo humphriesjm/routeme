@@ -12,12 +12,96 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="CbK-UC-tCf" kind="relationship" relationship="rootViewController" id="NUt-pz-DFF"/>
+                        <segue destination="vrz-uA-nUK" kind="relationship" relationship="rootViewController" id="VrL-Bi-0Bc"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GWl-sM-Ari" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-384" y="131"/>
+        </scene>
+        <!--Home View Controller - On The Way-->
+        <scene sceneID="pJb-Jj-yZN">
+            <objects>
+                <viewController storyboardIdentifier="homeVC" id="vrz-uA-nUK" customClass="HomeViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="GfQ-MW-SXQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="e2Q-ki-3Y7"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="RMD-mH-c1z">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="el8-zn-RIt">
+                                <rect key="frame" x="99" y="94" width="123" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="Drive"/>
+                                    <segment title="Walk"/>
+                                </segments>
+                                <connections>
+                                    <action selector="driveWalkSegmentedControlChanged:" destination="vrz-uA-nUK" eventType="valueChanged" id="DJK-em-fg3"/>
+                                </connections>
+                            </segmentedControl>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="My location" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="CU9-2d-3X7">
+                                <rect key="frame" x="51" y="156" width="219" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="search"/>
+                                <connections>
+                                    <outlet property="delegate" destination="vrz-uA-nUK" id="aaF-YG-Z9w"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Destination" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="55E-D6-oeW">
+                                <rect key="frame" x="51" y="209" width="219" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="search"/>
+                                <connections>
+                                    <outlet property="delegate" destination="vrz-uA-nUK" id="xVH-W2-HGP"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Keyword" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Pz-u9-efH">
+                                <rect key="frame" x="51" y="279" width="219" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="go"/>
+                                <connections>
+                                    <outlet property="delegate" destination="vrz-uA-nUK" id="zbQ-3j-pjt"/>
+                                </connections>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uDa-na-Gwi">
+                                <rect key="frame" x="51" y="336" width="219" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Go!">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="goAction:" destination="vrz-uA-nUK" eventType="touchUpInside" id="FxU-kO-plk"/>
+                                </connections>
+                            </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="iXP-6M-ZFC">
+                                <rect key="frame" x="23" y="161" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="On The Way" id="CBU-x2-Isp">
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="ka1-Sl-6W9"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="driveWalkSegmentedControl" destination="el8-zn-RIt" id="bHz-y6-RkU"/>
+                        <outlet property="goButton" destination="uDa-na-Gwi" id="vsa-an-Cap"/>
+                        <outlet property="keywordField" destination="0Pz-u9-efH" id="le1-gh-adt"/>
+                        <outlet property="locationAI" destination="iXP-6M-ZFC" id="M4A-Ul-Vbk"/>
+                        <outlet property="myDestinationField" destination="55E-D6-oeW" id="W6o-9I-J7m"/>
+                        <outlet property="myLocationField" destination="CU9-2d-3X7" id="LmU-G9-iHp"/>
+                        <segue destination="vXZ-lx-hvc" kind="push" identifier="homeToMapSegue" id="Y26-J3-wmJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Nma-Jg-Oyy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="37" y="131"/>
         </scene>
         <!--Map View Controller - Map-->
         <scene sceneID="ufC-wZ-h7g">
@@ -33,12 +117,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Map" id="2HU-PK-NvI">
-                        <barButtonItem key="leftBarButtonItem" title="List" id="5wI-4T-SxU">
+                        <barButtonItem key="rightBarButtonItem" title="List" id="5wI-4T-SxU">
                             <connections>
                                 <action selector="leftBBIAction:" destination="vXZ-lx-hvc" id="Ji5-Fh-ixm"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="9qd-uA-CmA"/>
                     </navigationItem>
                     <connections>
                         <outlet property="leftBBI" destination="5wI-4T-SxU" id="Rxf-Wc-g3x"/>
@@ -46,7 +129,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="535" y="131"/>
+            <point key="canvasLocation" x="439" y="131"/>
         </scene>
         <!--Search Places View Controller - Search-->
         <scene sceneID="ixR-WM-5D5">
@@ -85,12 +168,11 @@
                     <connections>
                         <outlet property="placesTable" destination="rOA-7J-8uN" id="MTy-uN-DWo"/>
                         <outlet property="searchField" destination="Dsr-QD-lPx" id="n9G-z7-keX"/>
-                        <segue destination="vXZ-lx-hvc" kind="push" id="K4G-7A-Bb7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O4e-eb-yl7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="131"/>
+            <point key="canvasLocation" x="217" y="811"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

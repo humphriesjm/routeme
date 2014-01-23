@@ -34,9 +34,9 @@
     self.waypointStrings = [NSMutableArray array];
     
     // Create a GMSCameraPosition that tells the map to display the coordinate at zoom level 6
-    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:MY_APP_DELEGATE.lat
-                                                            longitude:MY_APP_DELEGATE.lng
-                                                                 zoom:13];
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:MY_APP_DELEGATE.currentLocation.coordinate.latitude
+                                                            longitude:MY_APP_DELEGATE.currentLocation.coordinate.longitude
+                                                                 zoom:10];
     self.mapView = [GMSMapView mapWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)
                                      camera:camera];
     self.mapView.myLocationEnabled = YES;
@@ -74,8 +74,12 @@
 
 -(void)placeWaypoints
 {
-    CLLocationCoordinate2D startPosition = CLLocationCoordinate2DMake([START_LAT floatValue], [START_LNG floatValue]);
-    CLLocationCoordinate2D endPosition = CLLocationCoordinate2DMake([END_LAT floatValue], [END_LNG floatValue]);
+    float startLat = MY_APP_DELEGATE.startingLocation.coordinate.latitude;
+    float startLng = MY_APP_DELEGATE.startingLocation.coordinate.longitude;
+    float endLat = MY_APP_DELEGATE.destinationLocation.coordinate.latitude;
+    float endLng = MY_APP_DELEGATE.destinationLocation.coordinate.longitude;
+    CLLocationCoordinate2D startPosition = CLLocationCoordinate2DMake(startLat, startLng);
+    CLLocationCoordinate2D endPosition = CLLocationCoordinate2DMake(endLat, endLng);
     
     GMSMarker *startMarker = [GMSMarker markerWithPosition:startPosition];
     GMSMarker *endMarker = [GMSMarker markerWithPosition:endPosition];
@@ -84,8 +88,8 @@
     [self.waypoints addObject:startMarker];
     [self.waypoints addObject:endMarker];
     
-    NSString *startPositionString = [NSString stringWithFormat:@"%f,%f", [START_LAT floatValue], [START_LNG floatValue]];
-    NSString *endPositionString = [NSString stringWithFormat:@"%f,%f", [END_LAT floatValue], [END_LNG floatValue]];
+    NSString *startPositionString = [NSString stringWithFormat:@"%f,%f", startLat, startLng];
+    NSString *endPositionString = [NSString stringWithFormat:@"%f,%f", endLat, endLng];
     [self.waypointStrings addObject:startPositionString];
     [self.waypointStrings addObject:endPositionString];
     
@@ -107,7 +111,7 @@
     marker.position = CLLocationCoordinate2DMake(35.995602, -78.902153);
     marker.title = @"PopUp HQ";
     marker.snippet = @"Durham, NC";
-    marker.icon = [GMSMarker markerImageWithColor:[UIColor yellowColor]];
+    marker.icon = [GMSMarker markerImageWithColor:[UIColor grayColor]];
 //    marker.icon = [UIImage imageNamed:@"someicon.png"];
     marker.opacity = 0.9;
 //    marker.flat = YES;
@@ -132,74 +136,77 @@
 
 -(void)addDirections:(NSDictionary *)json
 {
-    NSDictionary *firstRoute = json[@"routes"][0];
-    NSArray *firstRouteLegs = firstRoute[@"legs"];
-//    NSLog(@"firstRouteLegs(%d): %@", firstRouteLegs.count, firstRouteLegs);
-    float routeStartLat = [firstRoute[@"legs"][0][@"start_location"][@"lat"] floatValue];
-    float routeStartLng = [firstRoute[@"legs"][0][@"start_location"][@"lng"] floatValue];
-    float routeEndLat = [firstRoute[@"legs"][0][@"end_location"][@"lat"] floatValue];
-    float routeEndLng = [firstRoute[@"legs"][0][@"end_location"][@"lng"] floatValue];
-    
-    float x1 = routeStartLat;
-    float y1 = routeStartLng;
-    float x2 = routeEndLat;
-    float y2 = routeEndLng;
-    
-    NSArray *steps = firstRouteLegs[0][@"steps"];
-    float totalDistanceValue = [firstRouteLegs[0][@"distance"][@"value"] floatValue]; // meters
-//    float totalDistanceTime = [firstRouteLegs[0][@"duration"][@"value"] floatValue]; // seconds
-    
-    float searchRadius = 2000.f;
-    float searchCircleNumber = ceilf(totalDistanceValue/(2.0*searchRadius));
-    for (float j=0; j<searchCircleNumber; j++) {
-//        GooglePlace *place = [[GooglePlace alloc] init];
-        float currentLaty = x1 + ((x2 - x1)/(j+1))*j;
-        float currentLngy = y1 + ((y2 - y1)/(j+1))*j;
-//        place.placeLat = currentLaty;
-//        place.placeLng = currentLngy;
-//        [self.googlePlacesArray addObject:place];
-        CLLocationCoordinate2D currentCoord = CLLocationCoordinate2DMake(currentLaty, currentLngy);
-        NSString *searchTerm = @"coffee";
-        NSLog(@"about to search (%@) lat(%f) lng(%f)", searchTerm, currentCoord.latitude, currentCoord.longitude);
-        [GooglePlacesSearcher searchKeyword:searchTerm
-                                      atLat:currentCoord.latitude
-                                        lng:currentCoord.longitude
-                                    success:^(NSArray *results) {
-                                        dispatch_async(dispatch_get_main_queue(), ^{
-                                            [self reloadPlacesArrayLocations:results];
-                                        });
-                                    } failure:^(NSError *error) {
-                                        NSLog(@"error0: %@", error.localizedDescription);
-                                    }];
-
+//    if (![json[@"status"] isEqualToString:@"ZERO RESULTS"]) {
+    if ([json[@"routes"] count] > 0) {
+        NSDictionary *firstRoute = json[@"routes"][0];
+        NSArray *firstRouteLegs = firstRoute[@"legs"];
+        //    NSLog(@"firstRouteLegs(%d): %@", firstRouteLegs.count, firstRouteLegs);
+        float routeStartLat = [firstRoute[@"legs"][0][@"start_location"][@"lat"] floatValue];
+        float routeStartLng = [firstRoute[@"legs"][0][@"start_location"][@"lng"] floatValue];
+        float routeEndLat = [firstRoute[@"legs"][0][@"end_location"][@"lat"] floatValue];
+        float routeEndLng = [firstRoute[@"legs"][0][@"end_location"][@"lng"] floatValue];
+        
+        float x1 = routeStartLat;
+        float y1 = routeStartLng;
+        float x2 = routeEndLat;
+        float y2 = routeEndLng;
+        
+        NSArray *steps = firstRouteLegs[0][@"steps"];
+        float totalDistanceValue = [firstRouteLegs[0][@"distance"][@"value"] floatValue]; // meters
+        //    float totalDistanceTime = [firstRouteLegs[0][@"duration"][@"value"] floatValue]; // seconds
+        
+        float searchRadius = 2000.f;
+        float searchCircleNumber = ceilf(totalDistanceValue/(2.0*searchRadius));
+        for (float j=0; j<searchCircleNumber; j++) {
+            //        GooglePlace *place = [[GooglePlace alloc] init];
+            float currentLaty = x1 + ((x2 - x1)/(j+1))*j;
+            float currentLngy = y1 + ((y2 - y1)/(j+1))*j;
+            //        place.placeLat = currentLaty;
+            //        place.placeLng = currentLngy;
+            //        [self.googlePlacesArray addObject:place];
+            CLLocationCoordinate2D currentCoord = CLLocationCoordinate2DMake(currentLaty, currentLngy);
+            NSString *searchTerm = MY_APP_DELEGATE.keywordSearchString.length > 0 ? MY_APP_DELEGATE.keywordSearchString : @"coffee";
+            NSLog(@"about to search (%@) lat(%f) lng(%f)", searchTerm, currentCoord.latitude, currentCoord.longitude);
+            [GooglePlacesSearcher searchKeyword:searchTerm
+                                          atLat:currentCoord.latitude
+                                            lng:currentCoord.longitude
+                                        success:^(NSArray *results) {
+                                            dispatch_async(dispatch_get_main_queue(), ^{
+                                                [self reloadPlacesArrayLocations:results];
+                                            });
+                                        } failure:^(NSError *error) {
+                                            NSLog(@"error0: %@", error.localizedDescription);
+                                        }];
+            
+        }
+        
+        float totalDistance = 0.f;
+        float totalTime = 0.f;
+        int i = 0;
+        for (NSDictionary *leg in steps) {
+            NSLog(@"distance:%@", leg[@"distance"][@"text"]);
+            float distanceValue = [leg[@"distance"][@"value"] floatValue]; // meters
+            float distanceTime = [leg[@"duration"][@"value"] floatValue]; // seconds
+            totalDistance += distanceValue;
+            totalTime += distanceTime;
+            NSLog(@"time:%@", leg[@"duration"][@"text"]);
+            NSLog(@"instructions:%@", leg[@"html_instructions"]);
+            NSLog(@"-------step %d--------", i+1);
+        }
+        
+        NSLog(@"firstRoute Leg Steps(%d)", steps.count);
+        NSLog(@"totalDistance: %f", totalDistance);
+        NSLog(@"easy total distance: %@", firstRouteLegs[0][@"distance"][@"value"]);
+        NSLog(@"totalTime: %f", totalTime);
+        NSLog(@"easy total time: %@", firstRouteLegs[0][@"duration"][@"value"]);
+        
+        // req
+        NSDictionary *routeOverviewPolyline = firstRoute[@"overview_polyline"];
+        NSString *overview_route = routeOverviewPolyline[@"points"];
+        GMSPath *path = [GMSPath pathFromEncodedPath:overview_route];
+        GMSPolyline *polyline = [GMSPolyline polylineWithPath:path];
+        polyline.map = self.mapView;
     }
-    
-    float totalDistance = 0.f;
-    float totalTime = 0.f;
-    int i = 0;
-    for (NSDictionary *leg in steps) {
-        NSLog(@"distance:%@", leg[@"distance"][@"text"]);
-        float distanceValue = [leg[@"distance"][@"value"] floatValue]; // meters
-        float distanceTime = [leg[@"duration"][@"value"] floatValue]; // seconds
-        totalDistance += distanceValue;
-        totalTime += distanceTime;
-        NSLog(@"time:%@", leg[@"duration"][@"text"]);
-        NSLog(@"instructions:%@", leg[@"html_instructions"]);
-        NSLog(@"-------step %d--------", i+1);
-    }
-    
-    NSLog(@"firstRoute Leg Steps(%d)", steps.count);
-    NSLog(@"totalDistance: %f", totalDistance);
-    NSLog(@"easy total distance: %@", firstRouteLegs[0][@"distance"][@"value"]);
-    NSLog(@"totalTime: %f", totalTime);
-    NSLog(@"easy total time: %@", firstRouteLegs[0][@"duration"][@"value"]);
-
-    // req
-    NSDictionary *routeOverviewPolyline = firstRoute[@"overview_polyline"];
-    NSString *overview_route = routeOverviewPolyline[@"points"];
-    GMSPath *path = [GMSPath pathFromEncodedPath:overview_route];
-    GMSPolyline *polyline = [GMSPolyline polylineWithPath:path];
-    polyline.map = self.mapView;
 }
 
 -(void)reloadPlacesArrayLocations:(NSArray*)places

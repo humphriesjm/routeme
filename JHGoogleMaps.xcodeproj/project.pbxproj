@@ -50,6 +50,7 @@
 		96777996188A3221007596BA /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 96777995188A3221007596BA /* LocationManager.m */; };
 		96777999188BF963007596BA /* GooglePlacesSearcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 96777998188BF963007596BA /* GooglePlacesSearcher.m */; };
 		9677799C188C0EE1007596BA /* GooglePlace.m in Sources */ = {isa = PBXBuildFile; fileRef = 9677799B188C0EE1007596BA /* GooglePlace.m */; };
+		967779A0188EB07B007596BA /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9677799F188EB07B007596BA /* HomeViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -126,6 +127,8 @@
 		96777998188BF963007596BA /* GooglePlacesSearcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GooglePlacesSearcher.m; sourceTree = "<group>"; };
 		9677799A188C0EE1007596BA /* GooglePlace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GooglePlace.h; sourceTree = "<group>"; };
 		9677799B188C0EE1007596BA /* GooglePlace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GooglePlace.m; sourceTree = "<group>"; };
+		9677799E188EB07B007596BA /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		9677799F188EB07B007596BA /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -272,6 +275,8 @@
 		9677794A1889D30B007596BA /* controllers */ = {
 			isa = PBXGroup;
 			children = (
+				9677799E188EB07B007596BA /* HomeViewController.h */,
+				9677799F188EB07B007596BA /* HomeViewController.m */,
 				96777991188A19C4007596BA /* SearchPlacesViewController.h */,
 				96777992188A19C4007596BA /* SearchPlacesViewController.m */,
 				967779251889D2AF007596BA /* MapViewController.h */,
@@ -429,6 +434,7 @@
 				96777999188BF963007596BA /* GooglePlacesSearcher.m in Sources */,
 				96777988188A18A0007596BA /* AFHTTPRequestOperation.m in Sources */,
 				9677798B188A18A0007596BA /* AFNetworkReachabilityManager.m in Sources */,
+				967779A0188EB07B007596BA /* HomeViewController.m in Sources */,
 				96777990188A18A0007596BA /* AFURLSessionManager.m in Sources */,
 				9677798E188A18A0007596BA /* AFURLRequestSerialization.m in Sources */,
 				967779271889D2AF007596BA /* MapViewController.m in Sources */,
