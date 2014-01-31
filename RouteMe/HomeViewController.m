@@ -25,6 +25,8 @@
 @property (assign, nonatomic) BOOL isInDrivingMode;
 @property (strong, nonatomic) NSMutableArray *destinationsArray;
 @property (strong, nonatomic) IBOutlet UITableView *destinationsTable;
+@property (weak, nonatomic) IBOutlet UILabel *endLocationCheckImage;
+@property (weak, nonatomic) IBOutlet UILabel *startLocationCheckImage;
 @end
 
 @implementation HomeViewController
@@ -35,6 +37,19 @@
     self.destinationsArray = [NSMutableArray array];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide) name:UIKeyboardDidHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationDidUpdate:) name:LOCATION_UPDATE_NOTIFICATION object:nil];
+}
+
+-(void)locationDidUpdate:(NSNotification*)notif
+{
+//    NSLog(@"notif: %@", notif);
+    if ([notif.object isKindOfClass:[CLLocation class]]) {
+        CLLocation *newLocation = (CLLocation*)notif.object;
+        [self.locationAI stopAnimating];
+        [self reverseGeocodeLocationForString:MY_APP_DELEGATE.currentLocation];
+        MY_APP_DELEGATE.startingLocation = newLocation;
+        self.startLocationCheckImage.hidden = NO;
+    }
 }
 
 -(void)keyboardDidHide
@@ -171,6 +186,9 @@
 {
     [super viewDidLoad];
     [self.locationAI startAnimating];
+    self.startLocationCheckImage.hidden = YES;
+    self.endLocationCheckImage.hidden = YES;
+    // if there's a valid currentLocation, set it to starting location via reverse geocode
     if (MY_APP_DELEGATE.currentLocation.coordinate.latitude != 0) {
         [self reverseGeocodeLocation:MY_APP_DELEGATE.currentLocation];
     }
@@ -188,7 +206,8 @@
          if ([placemarks count] >= 1) {
              CLPlacemark *placemark = [placemarks objectAtIndex:0];
              MY_APP_DELEGATE.destinationLocation = placemark.location;
-             [[[UIAlertView alloc] initWithTitle:@"Destination Set" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+             self.endLocationCheckImage.hidden = NO;
+//             [[[UIAlertView alloc] initWithTitle:@"Destination Set" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
          } else {
              [[[UIAlertView alloc] initWithTitle:@"Address not found" message:@"Sorry, I couldn't find that destination address." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
          }
@@ -205,7 +224,7 @@
          if ([placemarks count] >= 1) {
              CLPlacemark *placemark = [placemarks objectAtIndex:0];
              MY_APP_DELEGATE.startingLocation = placemark.location;
-             [[[UIAlertView alloc] initWithTitle:@"Current Location Set" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+             self.startLocationCheckImage.hidden = NO;
          } else {
              [[[UIAlertView alloc] initWithTitle:@"Address not found" message:@"Sorry, I couldn't find that starting address." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
          }
@@ -213,6 +232,22 @@
 }
 
 #pragma mark - CLGeocoder - reverseGeocodeLocation
+
+- (void)reverseGeocodeLocationForString:(CLLocation *)location
+{
+    CLGeocoder* reverseGeocoderTwo = [[CLGeocoder alloc] init];
+    if (reverseGeocoderTwo) {
+        [reverseGeocoderTwo reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
+            CLPlacemark* placemark = [placemarks objectAtIndex:0];
+            if (placemark) {
+                NSString *addr = [placemark.addressDictionary objectForKey:(NSString*)kABPersonAddressStreetKey];
+                NSString *city = [placemark.addressDictionary objectForKey:(NSString*)kABPersonAddressCityKey];
+                self.currentLocationString = [NSString stringWithFormat:@"%@ %@", addr, city];
+                self.myLocationField.text = self.currentLocationString;
+            }
+        }];
+    }
+}
 
 - (void)reverseGeocodeLocation:(CLLocation *)location
 {
@@ -224,6 +259,8 @@
                 NSString *addr = [placemark.addressDictionary objectForKey:(NSString*)kABPersonAddressStreetKey];
                 NSString *city = [placemark.addressDictionary objectForKey:(NSString*)kABPersonAddressCityKey];
                 self.currentLocationString = [NSString stringWithFormat:@"%@ %@", addr, city];
+                self.myLocationField.text = self.currentLocationString;
+                [self startBeginningSearch];
                 [self.locationAI stopAnimating];
             }
         }];
@@ -268,6 +305,8 @@
          dispatch_async(dispatch_get_main_queue(), ^{
              self.destinationsTable.hidden = YES;
              self.myDestinationField.text = gPlace.placeAddress;
+             MY_APP_DELEGATE.destinationLocation = [[CLLocation alloc] initWithLatitude:gPlace.placeLat longitude:gPlace.placeLng];
+             self.endLocationCheckImage.hidden = NO;
              [self.myDestinationField resignFirstResponder];
              [self.myLocationField resignFirstResponder];
          });
@@ -278,12 +317,12 @@
 
 #pragma mark - Properties
 
--(void)setCurrentLocationString:(NSString *)currentLocationString
-{
-    _currentLocationString = currentLocationString;
-    self.myLocationField.text = currentLocationString;
-    [self startBeginningSearch];
-}
+//-(void)setCurrentLocationString:(NSString *)currentLocationString
+//{
+//    _currentLocationString = currentLocationString;
+//    self.myLocationField.text = currentLocationString;
+//    [self startBeginningSearch];
+//}
 
 
 @end

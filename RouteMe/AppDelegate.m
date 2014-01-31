@@ -26,11 +26,11 @@
     NSDate *now = [NSDate date];
     float timeDiff = [now timeIntervalSinceDate:self.lastLocationUpdate];
     NSLog(@"time diff:%f", timeDiff*60.f);
-//    if ([self.lastLocationUpdate timeIntervalSinceNow])
-    self.lat = lastLocation.coordinate.latitude;
-    self.lng = lastLocation.coordinate.longitude;
-    if (self.numberOfLocationUpdates >= 5) {
+    if (self.numberOfLocationUpdates >= 5 || lastLocation.horizontalAccuracy < 100) {
+        self.lat = lastLocation.coordinate.latitude;
+        self.lng = lastLocation.coordinate.longitude;
         [self.locationManager stopUpdatingLocation];
+        [[NSNotificationCenter defaultCenter] postNotificationName:LOCATION_UPDATE_NOTIFICATION object:lastLocation];
     }
 }
 
@@ -39,8 +39,8 @@
     self.mainPlacesArray = [NSMutableArray array];
     self.numberOfLocationUpdates = 0;
     
-    self.lat = [START_LAT floatValue];
-    self.lng = [START_LNG floatValue];
+    self.lat = 0.f; // [START_LAT floatValue];
+    self.lng = 0.f; // [START_LNG floatValue];
     
 //    [Flurry setCrashReportingEnabled:YES];
     [Flurry startSession:FLURRY_DEV_TOKEN];

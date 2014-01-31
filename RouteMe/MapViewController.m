@@ -55,7 +55,7 @@
     self.mapView.hidden = NO;
     [self.view addSubview:self.mapView];
     
-    [self placePopupMarker];
+//    [self placePopupMarker];
     [self placeWaypoints];
     
     // table
@@ -153,7 +153,7 @@
         float totalDistanceValue = [firstRouteLegs[0][@"distance"][@"value"] floatValue]; // meters
         //    float totalDistanceTime = [firstRouteLegs[0][@"duration"][@"value"] floatValue]; // seconds
         
-        float searchRadius = 2000.f;
+        float searchRadius = 500.f; // interval on the line to search
         float searchCircleNumber = ceilf(totalDistanceValue/(2.0*searchRadius));
         for (float j=0; j<searchCircleNumber; j++) {
             //        GooglePlace *place = [[GooglePlace alloc] init];

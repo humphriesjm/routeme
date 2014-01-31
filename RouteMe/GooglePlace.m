@@ -19,7 +19,7 @@
 {
     GooglePlace *newPlace = [[GooglePlace alloc] init];
     newPlace.placeLat = [placeDict[@"geometry"][@"location"][@"lat"] floatValue];
-    newPlace.placeLat = [placeDict[@"geometry"][@"location"][@"lat"] floatValue];
+    newPlace.placeLng = [placeDict[@"geometry"][@"location"][@"lng"] floatValue];
     newPlace.placeAddress = placeDict[@"formatted_address"];
     newPlace.placePhoneNumber = placeDict[@"formatted_phone_number"];
     newPlace.placeID = placeDict[@"id"];

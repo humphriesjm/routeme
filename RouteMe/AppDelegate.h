@@ -29,6 +29,8 @@
 
 #define MY_APP_DELEGATE ((AppDelegate *)[UIApplication sharedApplication].delegate)
 
+#define LOCATION_UPDATE_NOTIFICATION @"LocationUpdateNotification"
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate, CLLocationManagerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;

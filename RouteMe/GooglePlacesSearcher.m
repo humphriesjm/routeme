@@ -18,15 +18,16 @@
              success:(void (^)(NSArray *))success
              failure:(void (^)(NSError *))failure
 {
-    float radius = 2000.f;
+    float radius = 2000.f; // how far from the line it will search
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
     manager.requestSerializer = [AFJSONRequestSerializer serializerWithWritingOptions:NSJSONWritingPrettyPrinted];
     NSString *locationString = [NSString stringWithFormat:@"%f,%f", lat, lng];
     NSString *paramsString = [NSString stringWithFormat:@"%@?location=%@&radius=%f&keyword=%@&sensor=false&key=%@", GOOGLE_PLACES_API_BASE_URL, locationString, radius, term, GOOGLE_PLACES_API_KEY];
+    NSString *encodedParamsString = [paramsString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
     NSLog(@"-=-=GOOGLE PLACES API SEARCH TICK=-=-");
     [Flurry logEvent:@"GOOGLE PLACES API SEARCH"];
-    [manager GET:paramsString
+    [manager GET:encodedParamsString
       parameters:nil
          success:^(AFHTTPRequestOperation *operation, id responseObject) {
 //             NSLog(@"success:%@", responseObject);
