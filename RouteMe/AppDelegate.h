@@ -10,7 +10,7 @@
 #import <GoogleMaps/GoogleMaps.h>
 #import <CoreLocation/CoreLocation.h>
 
-#define GOOGLE_MAPS_API_KEY @"AIzaSyBhF3Wx4zluGHMjNfcNHZKWZ6_QKP2OKwg"
+#define GOOGLE_MAPS_API_KEY @"AIzaSyCPz4xDP5opkeCiEm7qpiqdtLOXCanlyEU"
 #define GOOGLE_PLACES_API_KEY @"AIzaSyAo0uvnBOcWnCUWzwLYjz-U9wNTpstAXBg"
 
 #define START_LAT @(35.9409076) // Colonial Grand
@@ -22,6 +22,9 @@
 
 #define GOOGLE_PLACES_API_BASE_URL @"https://maps.googleapis.com/maps/api/place/nearbysearch/json"
 #define GOOGLE_DIRECTIONS_API_BASE_URL @"http://maps.googleapis.com/maps/api/directions/json?"
+#define GOOGLE_PLACES_AUTOCOMPLETE_API_BASE_URL @"https://maps.googleapis.com/maps/api/place/autocomplete/json"
+
+#define FLURRY_DEV_TOKEN @"WVM5S4ZTV3T8TVVTKPSF"
 
 #define MY_APP_DELEGATE ((AppDelegate *)[UIApplication sharedApplication].delegate)
 

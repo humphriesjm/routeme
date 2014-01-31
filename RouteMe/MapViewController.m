@@ -52,7 +52,6 @@
     self.mapView.settings.compassButton = YES;
     self.mapView.settings.myLocationButton = YES;
     self.mapView.delegate = self;
-//    self.view = self.mapView;
     self.mapView.hidden = NO;
     [self.view addSubview:self.mapView];
     
@@ -60,7 +59,6 @@
     [self placeWaypoints];
     
     // table
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64.f, self.view.bounds.size.width, self.view.bounds.size.height - 64.f) style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.hidden = YES;
@@ -194,7 +192,7 @@
             NSLog(@"-------step %d--------", i+1);
         }
         
-        NSLog(@"firstRoute Leg Steps(%d)", steps.count);
+        NSLog(@"firstRoute Leg Steps(%lu)", (unsigned long)steps.count);
         NSLog(@"totalDistance: %f", totalDistance);
         NSLog(@"easy total distance: %@", firstRouteLegs[0][@"distance"][@"value"]);
         NSLog(@"totalTime: %f", totalTime);
@@ -211,9 +209,9 @@
 
 -(void)reloadPlacesArrayLocations:(NSArray*)places
 {
-    NSLog(@"adding %d places", places.count);
+    NSLog(@"adding %lu places", (unsigned long)places.count);
     NSArray *newPlacesArrayCopy = [places copy];
-    NSLog(@"placesArray count: (%d)", MY_APP_DELEGATE.mainPlacesArray.count);
+    NSLog(@"placesArray count: (%lu)", (unsigned long)MY_APP_DELEGATE.mainPlacesArray.count);
     // add new place pins to map
     for (NSDictionary *place in newPlacesArrayCopy) {
 //        NSLog(@"place:%@", place);

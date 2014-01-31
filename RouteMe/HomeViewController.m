@@ -10,8 +10,10 @@
 #import "AppDelegate.h"
 #import <AddressBook/AddressBook.h>
 #import "MapViewController.h"
+#import "GooglePlacesAutocompletor.h"
+#import "GooglePlace.h"
 
-@interface HomeViewController () <UITextFieldDelegate>
+@interface HomeViewController () <UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) IBOutlet UISegmentedControl *driveWalkSegmentedControl;
 @property (strong, nonatomic) IBOutlet UITextField *myLocationField;
 @property (strong, nonatomic) IBOutlet UITextField *myDestinationField;
@@ -20,6 +22,8 @@
 @property (strong, nonatomic) NSString *currentLocationString;
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *locationAI;
 @property (assign, nonatomic) BOOL isInDrivingMode;
+@property (strong, nonatomic) NSMutableArray *destinationsArray;
+@property (strong, nonatomic) IBOutlet UITableView *destinationsTable;
 @end
 
 @implementation HomeViewController
@@ -27,6 +31,7 @@
 -(void)awakeFromNib
 {
     self.isInDrivingMode = YES;
+    self.destinationsArray = [NSMutableArray array];
 }
 
 - (IBAction)driveWalkSegmentedControlChanged:(id)sender
@@ -69,6 +74,55 @@
             MY_APP_DELEGATE.keywordSearchString = textField.text;
             [self goAction:nil];
         }
+    }
+    return YES;
+}
+
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    NSString *currentInputString = [textField.text stringByAppendingString:string];
+    if (currentInputString.length < 1) {
+        // nothing entered
+    } else if (currentInputString.length < 2) {
+        // not enough entered to search yet
+    } else if (currentInputString.length > 2 && [textField isEqual:self.myDestinationField] && MY_APP_DELEGATE.lat != 0) {
+        // now do an autocomplete search
+        [GooglePlacesAutocompletor searchTerm:currentInputString
+                                        atLat:MY_APP_DELEGATE.lat
+                                          lng:MY_APP_DELEGATE.lng
+                                      success:
+         ^(NSArray *results) {
+//             NSLog(@"autocompletor success:\n%@", results);
+             if (results.count > 0) {
+                 [self.destinationsArray removeAllObjects];
+                 for (NSDictionary *result in results) {
+                     GooglePlace *place = [[GooglePlace alloc] init];
+                     place.placeID = result[@"id"];
+                     place.placeTitle = result[@"description"];
+//                     NSLog(@"reference:%@", result[@"reference"]);
+//                     NSLog(@"terms:%@", result[@"terms"][0][@"value"]);
+                     // add place to local array of places unless it exists
+                     if (self.destinationsArray.count > 0) {
+                         NSArray *localplacescopy = [self.destinationsArray copy];
+                         for (GooglePlace *p in localplacescopy) {
+                             if ([p.placeID isEqualToString:place.placeID]) {
+                                 // don't add to array
+                             } else {
+                                 [self.destinationsArray addObject:place];
+                                 break;
+                             }
+                         }
+                     } else {
+                         [self.destinationsArray addObject:place];
+                     }
+                     dispatch_async(dispatch_get_main_queue(), ^{
+                         [self.destinationsTable reloadData];
+                     });
+                 }
+             }
+         } failure:^(NSError *error) {
+             NSLog(@"autocompletor error: %@", error.localizedDescription);
+         }];
     }
     return YES;
 }
@@ -127,7 +181,7 @@
          if ([placemarks count] >= 1) {
              CLPlacemark *placemark = [placemarks objectAtIndex:0];
              MY_APP_DELEGATE.startingLocation = placemark.location;
-             [[[UIAlertView alloc] initWithTitle:@"Starting Location Set" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+             [[[UIAlertView alloc] initWithTitle:@"Current Location Set" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
          } else {
              [[[UIAlertView alloc] initWithTitle:@"Address not found" message:@"Sorry, I couldn't find that starting address." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
          }
@@ -150,6 +204,40 @@
             }
         }];
     }
+}
+
+#pragma mark <UITableViewDataSource>
+
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath: (NSIndexPath *) indexPath {
+    return 44.0;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.destinationsArray.count;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"destinationAC"];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"destinationAC"];
+    }
+    cell.textLabel.text = [self.destinationsArray[indexPath.row] placeTitle];
+    return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    GooglePlace *selectedPlace = (GooglePlace*)self.destinationsArray[indexPath.row];
+    NSLog(@"you selected %@", selectedPlace.placeTitle);
+    
 }
 
 #pragma mark - Properties

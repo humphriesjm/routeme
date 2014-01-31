@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "Flurry.h"
 
 @implementation AppDelegate
 
@@ -41,6 +42,8 @@
     self.lat = [START_LAT floatValue];
     self.lng = [START_LNG floatValue];
     
+//    [Flurry setCrashReportingEnabled:YES];
+    [Flurry startSession:FLURRY_DEV_TOKEN];
     [GMSServices provideAPIKey:GOOGLE_MAPS_API_KEY];
     
     self.locationManager = [[CLLocationManager alloc] init];

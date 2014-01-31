@@ -83,6 +83,15 @@
                                 <rect key="frame" x="23" y="161" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </activityIndicatorView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="p5j-dO-6hM">
+                                <rect key="frame" x="0.0" y="242" width="320" height="215"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="vrz-uA-nUK" id="7PV-Tm-cCU"/>
+                                    <outlet property="delegate" destination="vrz-uA-nUK" id="KJ7-gL-cBS"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -90,6 +99,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="ka1-Sl-6W9"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="destinationsTable" destination="p5j-dO-6hM" id="X24-DP-nId"/>
                         <outlet property="driveWalkSegmentedControl" destination="el8-zn-RIt" id="bHz-y6-RkU"/>
                         <outlet property="goButton" destination="uDa-na-Gwi" id="vsa-an-Cap"/>
                         <outlet property="keywordField" destination="0Pz-u9-efH" id="le1-gh-adt"/>
@@ -114,6 +124,13 @@
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="6yU-b1-fIr">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Map" id="2HU-PK-NvI">
@@ -125,6 +142,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="leftBBI" destination="5wI-4T-SxU" id="Rxf-Wc-g3x"/>
+                        <outlet property="tableView" destination="6yU-b1-fIr" id="cEO-Sm-Kpl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>

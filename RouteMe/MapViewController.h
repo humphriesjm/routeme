@@ -12,7 +12,7 @@
 @interface MapViewController : UIViewController
 
 @property (strong, nonatomic) GMSMapView *mapView;
-@property (strong, nonatomic) UITableView *tableView;
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *googlePlacesArray;
 //@property (strong, nonatomic) NSMutableArray *placesArray;
 

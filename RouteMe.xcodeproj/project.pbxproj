@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		965D429A189C22D90071D80E /* libFlurry_4.3.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 965D4299189C22D90071D80E /* libFlurry_4.3.1.a */; };
+		965D429C189C23610071D80E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 965D429B189C23610071D80E /* Security.framework */; };
 		967779111889D2AE007596BA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 967779101889D2AE007596BA /* Foundation.framework */; };
 		967779131889D2AE007596BA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 967779121889D2AE007596BA /* CoreGraphics.framework */; };
 		967779151889D2AE007596BA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 967779141889D2AE007596BA /* UIKit.framework */; };
@@ -51,6 +53,8 @@
 		96777999188BF963007596BA /* GooglePlacesSearcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 96777998188BF963007596BA /* GooglePlacesSearcher.m */; };
 		9677799C188C0EE1007596BA /* GooglePlace.m in Sources */ = {isa = PBXBuildFile; fileRef = 9677799B188C0EE1007596BA /* GooglePlace.m */; };
 		967779A0188EB07B007596BA /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9677799F188EB07B007596BA /* HomeViewController.m */; };
+		96F45546189B714600C81BD7 /* RMRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F45545189B714600C81BD7 /* RMRoute.m */; };
+		96F45549189B737100C81BD7 /* GooglePlacesAutocompletor.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F45548189B737100C81BD7 /* GooglePlacesAutocompletor.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +68,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		965D4298189C22D90071D80E /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
+		965D4299189C22D90071D80E /* libFlurry_4.3.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_4.3.1.a; sourceTree = "<group>"; };
+		965D429B189C23610071D80E /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		9677790D1889D2AE007596BA /* RouteMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RouteMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		967779101889D2AE007596BA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		967779121889D2AE007596BA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -129,6 +136,10 @@
 		9677799B188C0EE1007596BA /* GooglePlace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GooglePlace.m; sourceTree = "<group>"; };
 		9677799E188EB07B007596BA /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		9677799F188EB07B007596BA /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		96F45544189B714600C81BD7 /* RMRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMRoute.h; sourceTree = "<group>"; };
+		96F45545189B714600C81BD7 /* RMRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMRoute.m; sourceTree = "<group>"; };
+		96F45547189B737100C81BD7 /* GooglePlacesAutocompletor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GooglePlacesAutocompletor.h; sourceTree = "<group>"; };
+		96F45548189B737100C81BD7 /* GooglePlacesAutocompletor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GooglePlacesAutocompletor.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +147,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				965D429C189C23610071D80E /* Security.framework in Frameworks */,
 				967779691889D4CA007596BA /* SystemConfiguration.framework in Frameworks */,
 				967779671889D4C2007596BA /* QuartzCore.framework in Frameworks */,
 				967779651889D4BA007596BA /* OpenGLES.framework in Frameworks */,
@@ -144,6 +156,7 @@
 				9677795F1889D49F007596BA /* libc++.dylib in Frameworks */,
 				9677795D1889D496007596BA /* ImageIO.framework in Frameworks */,
 				9677795B1889D490007596BA /* GLKit.framework in Frameworks */,
+				965D429A189C22D90071D80E /* libFlurry_4.3.1.a in Frameworks */,
 				967779591889D47C007596BA /* CoreText.framework in Frameworks */,
 				967779571889D476007596BA /* CoreData.framework in Frameworks */,
 				967779551889D470007596BA /* AVFoundation.framework in Frameworks */,
@@ -169,6 +182,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		965D4297189C22D90071D80E /* Flurry */ = {
+			isa = PBXGroup;
+			children = (
+				965D4298189C22D90071D80E /* Flurry.h */,
+				965D4299189C22D90071D80E /* libFlurry_4.3.1.a */,
+			);
+			path = Flurry;
+			sourceTree = "<group>";
+		};
 		967779041889D2AE007596BA = {
 			isa = PBXGroup;
 			children = (
@@ -191,6 +213,7 @@
 		9677790F1889D2AE007596BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				965D429B189C23610071D80E /* Security.framework */,
 				967779681889D4CA007596BA /* SystemConfiguration.framework */,
 				967779661889D4C2007596BA /* QuartzCore.framework */,
 				967779641889D4BA007596BA /* OpenGLES.framework */,
@@ -217,6 +240,7 @@
 		967779161889D2AE007596BA /* RouteMe */ = {
 			isa = PBXGroup;
 			children = (
+				965D4297189C22D90071D80E /* Flurry */,
 				9677799D188C0EE9007596BA /* models */,
 				96777974188A18A0007596BA /* AFNetworking */,
 				9677794B1889D313007596BA /* views */,
@@ -260,6 +284,8 @@
 		967779491889D303007596BA /* helpers */ = {
 			isa = PBXGroup;
 			children = (
+				96F45547189B737100C81BD7 /* GooglePlacesAutocompletor.h */,
+				96F45548189B737100C81BD7 /* GooglePlacesAutocompletor.m */,
 				96777997188BF963007596BA /* GooglePlacesSearcher.h */,
 				96777998188BF963007596BA /* GooglePlacesSearcher.m */,
 				96777994188A3221007596BA /* LocationManager.h */,
@@ -324,6 +350,8 @@
 			children = (
 				9677799A188C0EE1007596BA /* GooglePlace.h */,
 				9677799B188C0EE1007596BA /* GooglePlace.m */,
+				96F45544189B714600C81BD7 /* RMRoute.h */,
+				96F45545189B714600C81BD7 /* RMRoute.m */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -438,12 +466,14 @@
 				96777990188A18A0007596BA /* AFURLSessionManager.m in Sources */,
 				9677798E188A18A0007596BA /* AFURLRequestSerialization.m in Sources */,
 				967779271889D2AF007596BA /* MapViewController.m in Sources */,
+				96F45549189B737100C81BD7 /* GooglePlacesAutocompletor.m in Sources */,
 				9677799C188C0EE1007596BA /* GooglePlace.m in Sources */,
 				9677798F188A18A0007596BA /* AFURLResponseSerialization.m in Sources */,
 				967779211889D2AF007596BA /* AppDelegate.m in Sources */,
 				9677796C1889E4B5007596BA /* MDDirectionService.m in Sources */,
 				96777989188A18A0007596BA /* AFHTTPRequestOperationManager.m in Sources */,
 				9677798C188A18A0007596BA /* AFSecurityPolicy.m in Sources */,
+				96F45546189B714600C81BD7 /* RMRoute.m in Sources */,
 				9677791D1889D2AF007596BA /* main.m in Sources */,
 				9677798A188A18A0007596BA /* AFHTTPSessionManager.m in Sources */,
 				96777993188A19C4007596BA /* SearchPlacesViewController.m in Sources */,
@@ -583,6 +613,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RouteMe/RouteMe-Prefix.pch";
 				INFOPLIST_FILE = "RouteMe/RouteMe-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/jason/Desktop/Dev/AdamCohen/RouteMe/RouteMe/Flurry,
+				);
 				PRODUCT_NAME = RouteMe;
 				WRAPPER_EXTENSION = app;
 			};
@@ -601,6 +635,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RouteMe/RouteMe-Prefix.pch";
 				INFOPLIST_FILE = "RouteMe/RouteMe-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/jason/Desktop/Dev/AdamCohen/RouteMe/RouteMe/Flurry,
+				);
 				PRODUCT_NAME = RouteMe;
 				WRAPPER_EXTENSION = app;
 			};
