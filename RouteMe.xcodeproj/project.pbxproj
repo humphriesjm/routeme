@@ -64,23 +64,23 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		9677790D1889D2AE007596BA /* JHGoogleMaps.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JHGoogleMaps.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9677790D1889D2AE007596BA /* RouteMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RouteMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		967779101889D2AE007596BA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		967779121889D2AE007596BA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		967779141889D2AE007596BA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		967779181889D2AE007596BA /* JHGoogleMaps-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JHGoogleMaps-Info.plist"; sourceTree = "<group>"; };
+		967779181889D2AE007596BA /* RouteMe-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RouteMe-Info.plist"; sourceTree = "<group>"; };
 		9677791A1889D2AF007596BA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9677791C1889D2AF007596BA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		9677791E1889D2AF007596BA /* JHGoogleMaps-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JHGoogleMaps-Prefix.pch"; sourceTree = "<group>"; };
+		9677791E1889D2AF007596BA /* RouteMe-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RouteMe-Prefix.pch"; sourceTree = "<group>"; };
 		9677791F1889D2AF007596BA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		967779201889D2AF007596BA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		967779231889D2AF007596BA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		967779251889D2AF007596BA /* MapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		967779261889D2AF007596BA /* MapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		967779281889D2AF007596BA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		9677792E1889D2AF007596BA /* JHGoogleMapsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JHGoogleMapsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9677792E1889D2AF007596BA /* RouteMeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RouteMeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9677792F1889D2AF007596BA /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		967779371889D2AF007596BA /* JHGoogleMapsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JHGoogleMapsTests-Info.plist"; sourceTree = "<group>"; };
+		967779371889D2AF007596BA /* RouteMeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RouteMeTests-Info.plist"; sourceTree = "<group>"; };
 		967779391889D2AF007596BA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9677793B1889D2AF007596BA /* JHGoogleMapsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JHGoogleMapsTests.m; sourceTree = "<group>"; };
 		967779451889D2E6007596BA /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -172,8 +172,8 @@
 		967779041889D2AE007596BA = {
 			isa = PBXGroup;
 			children = (
-				967779161889D2AE007596BA /* JHGoogleMaps */,
-				967779351889D2AF007596BA /* JHGoogleMapsTests */,
+				967779161889D2AE007596BA /* RouteMe */,
+				967779351889D2AF007596BA /* RouteMeTests */,
 				9677790F1889D2AE007596BA /* Frameworks */,
 				9677790E1889D2AE007596BA /* Products */,
 			);
@@ -182,8 +182,8 @@
 		9677790E1889D2AE007596BA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9677790D1889D2AE007596BA /* JHGoogleMaps.app */,
-				9677792E1889D2AF007596BA /* JHGoogleMapsTests.xctest */,
+				9677790D1889D2AE007596BA /* RouteMe.app */,
+				9677792E1889D2AF007596BA /* RouteMeTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -214,7 +214,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		967779161889D2AE007596BA /* JHGoogleMaps */ = {
+		967779161889D2AE007596BA /* RouteMe */ = {
 			isa = PBXGroup;
 			children = (
 				9677799D188C0EE9007596BA /* models */,
@@ -224,34 +224,34 @@
 				967779491889D303007596BA /* helpers */,
 				967779171889D2AE007596BA /* Supporting Files */,
 			);
-			path = JHGoogleMaps;
+			path = RouteMe;
 			sourceTree = "<group>";
 		};
 		967779171889D2AE007596BA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
 				967779281889D2AF007596BA /* Images.xcassets */,
-				967779181889D2AE007596BA /* JHGoogleMaps-Info.plist */,
+				967779181889D2AE007596BA /* RouteMe-Info.plist */,
 				967779191889D2AF007596BA /* InfoPlist.strings */,
 				9677791C1889D2AF007596BA /* main.m */,
-				9677791E1889D2AF007596BA /* JHGoogleMaps-Prefix.pch */,
+				9677791E1889D2AF007596BA /* RouteMe-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		967779351889D2AF007596BA /* JHGoogleMapsTests */ = {
+		967779351889D2AF007596BA /* RouteMeTests */ = {
 			isa = PBXGroup;
 			children = (
 				9677793B1889D2AF007596BA /* JHGoogleMapsTests.m */,
 				967779361889D2AF007596BA /* Supporting Files */,
 			);
-			path = JHGoogleMapsTests;
+			path = RouteMeTests;
 			sourceTree = "<group>";
 		};
 		967779361889D2AF007596BA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				967779371889D2AF007596BA /* JHGoogleMapsTests-Info.plist */,
+				967779371889D2AF007596BA /* RouteMeTests-Info.plist */,
 				967779381889D2AF007596BA /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
@@ -331,9 +331,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		9677790C1889D2AE007596BA /* JHGoogleMaps */ = {
+		9677790C1889D2AE007596BA /* RouteMe */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9677793F1889D2AF007596BA /* Build configuration list for PBXNativeTarget "JHGoogleMaps" */;
+			buildConfigurationList = 9677793F1889D2AF007596BA /* Build configuration list for PBXNativeTarget "RouteMe" */;
 			buildPhases = (
 				967779091889D2AE007596BA /* Sources */,
 				9677790A1889D2AE007596BA /* Frameworks */,
@@ -343,14 +343,14 @@
 			);
 			dependencies = (
 			);
-			name = JHGoogleMaps;
+			name = RouteMe;
 			productName = JHGoogleMaps;
-			productReference = 9677790D1889D2AE007596BA /* JHGoogleMaps.app */;
+			productReference = 9677790D1889D2AE007596BA /* RouteMe.app */;
 			productType = "com.apple.product-type.application";
 		};
-		9677792D1889D2AF007596BA /* JHGoogleMapsTests */ = {
+		9677792D1889D2AF007596BA /* RouteMeTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 967779421889D2AF007596BA /* Build configuration list for PBXNativeTarget "JHGoogleMapsTests" */;
+			buildConfigurationList = 967779421889D2AF007596BA /* Build configuration list for PBXNativeTarget "RouteMeTests" */;
 			buildPhases = (
 				9677792A1889D2AF007596BA /* Sources */,
 				9677792B1889D2AF007596BA /* Frameworks */,
@@ -361,9 +361,9 @@
 			dependencies = (
 				967779341889D2AF007596BA /* PBXTargetDependency */,
 			);
-			name = JHGoogleMapsTests;
+			name = RouteMeTests;
 			productName = JHGoogleMapsTests;
-			productReference = 9677792E1889D2AF007596BA /* JHGoogleMapsTests.xctest */;
+			productReference = 9677792E1889D2AF007596BA /* RouteMeTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -383,7 +383,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 967779081889D2AE007596BA /* Build configuration list for PBXProject "JHGoogleMaps" */;
+			buildConfigurationList = 967779081889D2AE007596BA /* Build configuration list for PBXProject "RouteMe" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -396,8 +396,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				9677790C1889D2AE007596BA /* JHGoogleMaps */,
-				9677792D1889D2AF007596BA /* JHGoogleMapsTests */,
+				9677790C1889D2AE007596BA /* RouteMe */,
+				9677792D1889D2AF007596BA /* RouteMeTests */,
 			);
 		};
 /* End PBXProject section */
@@ -463,7 +463,7 @@
 /* Begin PBXTargetDependency section */
 		967779341889D2AF007596BA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 9677790C1889D2AE007596BA /* JHGoogleMaps */;
+			target = 9677790C1889D2AE007596BA /* RouteMe */;
 			targetProxy = 967779331889D2AF007596BA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -578,12 +578,12 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/jason/Desktop/Dev/AdamCohen/JHGoogleMaps,
+					/Users/jason/Desktop/Dev/AdamCohen/RouteMe,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "JHGoogleMaps/JHGoogleMaps-Prefix.pch";
-				INFOPLIST_FILE = "JHGoogleMaps/JHGoogleMaps-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "RouteMe/RouteMe-Prefix.pch";
+				INFOPLIST_FILE = "RouteMe/RouteMe-Info.plist";
+				PRODUCT_NAME = RouteMe;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -596,12 +596,12 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/jason/Desktop/Dev/AdamCohen/JHGoogleMaps,
+					/Users/jason/Desktop/Dev/AdamCohen/RouteMe,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "JHGoogleMaps/JHGoogleMaps-Prefix.pch";
-				INFOPLIST_FILE = "JHGoogleMaps/JHGoogleMaps-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "RouteMe/RouteMe-Prefix.pch";
+				INFOPLIST_FILE = "RouteMe/RouteMe-Info.plist";
+				PRODUCT_NAME = RouteMe;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -622,8 +622,8 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "JHGoogleMapsTests/JHGoogleMapsTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "JHGoogleMapsTests/RouteMeTests-Info.plist";
+				PRODUCT_NAME = RouteMeTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -641,8 +641,8 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JHGoogleMaps/JHGoogleMaps-Prefix.pch";
-				INFOPLIST_FILE = "JHGoogleMapsTests/JHGoogleMapsTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "JHGoogleMapsTests/RouteMeTests-Info.plist";
+				PRODUCT_NAME = RouteMeTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -651,7 +651,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		967779081889D2AE007596BA /* Build configuration list for PBXProject "JHGoogleMaps" */ = {
+		967779081889D2AE007596BA /* Build configuration list for PBXProject "RouteMe" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9677793D1889D2AF007596BA /* Debug */,
@@ -660,21 +660,23 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9677793F1889D2AF007596BA /* Build configuration list for PBXNativeTarget "JHGoogleMaps" */ = {
+		9677793F1889D2AF007596BA /* Build configuration list for PBXNativeTarget "RouteMe" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				967779401889D2AF007596BA /* Debug */,
 				967779411889D2AF007596BA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
-		967779421889D2AF007596BA /* Build configuration list for PBXNativeTarget "JHGoogleMapsTests" */ = {
+		967779421889D2AF007596BA /* Build configuration list for PBXNativeTarget "RouteMeTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				967779431889D2AF007596BA /* Debug */,
 				967779441889D2AF007596BA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
