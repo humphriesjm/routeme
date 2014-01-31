@@ -11,6 +11,8 @@
 #import "AFNetworking.h"
 #import "AppDelegate.h"
 
+@class GooglePlace;
+
 @interface GooglePlacesSearcher : NSObject
 
 @property (strong, nonatomic) NSArray *placesArray;
@@ -20,5 +22,9 @@
                  lng:(float)lng
              success:(void(^)(NSArray *))success
              failure:(void(^)(NSError *))failure;
+
++(void)getGooglePlaceByReference:(NSString*)placeReference
+                         success:(void(^)(GooglePlace *))success
+                         failure:(void(^)(NSError *))failure;
 
 @end

@@ -18,8 +18,16 @@
 @property (strong, nonatomic) NSArray *types;
 @property (strong, nonatomic) NSString *iconURL;
 @property (strong, nonatomic) NSString *placeID;
+@property (strong, nonatomic) NSString *placeReference;
 @property (strong, nonatomic) NSString *placeTitle;
 @property (strong, nonatomic) NSString *placeSubtitle;
+@property (strong, nonatomic) NSString *placeAddress;
+@property (strong, nonatomic) NSString *placePhoneNumber;
+@property (strong, nonatomic) NSString *placeURL;
+@property (strong, nonatomic) NSString *placeWebsite;
 @property (assign, nonatomic) float placeOpacity;
 @property (strong, nonatomic) GMSMarker *placeMarker;
+
++(GooglePlace*)buildPlaceWithPlaceDetailResult:(NSDictionary*)placeDict;
+
 @end

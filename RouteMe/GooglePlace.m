@@ -15,4 +15,22 @@
     return [[CLLocation alloc] initWithLatitude:self.placeLat longitude:self.placeLng];
 }
 
++(GooglePlace *)buildPlaceWithPlaceDetailResult:(NSDictionary *)placeDict
+{
+    GooglePlace *newPlace = [[GooglePlace alloc] init];
+    newPlace.placeLat = [placeDict[@"geometry"][@"location"][@"lat"] floatValue];
+    newPlace.placeLat = [placeDict[@"geometry"][@"location"][@"lat"] floatValue];
+    newPlace.placeAddress = placeDict[@"formatted_address"];
+    newPlace.placePhoneNumber = placeDict[@"formatted_phone_number"];
+    newPlace.placeID = placeDict[@"id"];
+    newPlace.placeTitle = placeDict[@"name"];
+    newPlace.rating = placeDict[@"rating"];
+    newPlace.placeReference = placeDict[@"reference"];
+    newPlace.iconURL = placeDict[@"icon"];
+    newPlace.placeURL = placeDict[@"url"];
+    newPlace.placeWebsite = placeDict[@"website"];
+    
+    return newPlace;
+}
+
 @end

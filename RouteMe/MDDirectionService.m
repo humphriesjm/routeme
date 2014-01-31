@@ -8,6 +8,7 @@
 
 #import "MDDirectionService.h"
 #import "AppDelegate.h"
+#import "Flurry.h"
 
 @interface MDDirectionService()
 @property (assign, nonatomic) BOOL sensor;
@@ -40,6 +41,7 @@
     url = [[url stringByAddingPercentEscapesUsingEncoding: NSASCIIStringEncoding] mutableCopy];
     _directionsURL = [NSURL URLWithString:url];
     NSLog(@"-=-=GOOGLE DIRECTIONS API SEARCH TICK=-=-");
+    [Flurry logEvent:@"GOOGLE DIRECTIONS API SEARCH"];
     [self retrieveDirections:selector
                 withDelegate:delegate];
 }

@@ -9,6 +9,7 @@
 #import "GooglePlacesAutocompletor.h"
 #import "AFNetworking.h"
 #import "GooglePlace.h"
+#import "Flurry.h"
 
 @implementation GooglePlacesAutocompletor
 
@@ -27,6 +28,7 @@
     NSString *paramsString = [NSString stringWithFormat:@"%@?location=%@&radius=%f&input=%@&sensor=false&key=%@", GOOGLE_PLACES_AUTOCOMPLETE_API_BASE_URL, locationString, radius, term, GOOGLE_PLACES_API_KEY];
     NSString *encodedParamsString = [paramsString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
     NSLog(@"-=-=GOOGLE PLACES AUTOCOMPLETE API SEARCH TICK=-=-");
+    [Flurry logEvent:@"GOOGLE PLACES AUTOCOMPLETE API SEARCH"];
     [manager GET:encodedParamsString
       parameters:nil
          success:^(AFHTTPRequestOperation *operation, id responseObject) {

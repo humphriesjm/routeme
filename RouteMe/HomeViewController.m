@@ -12,6 +12,7 @@
 #import "MapViewController.h"
 #import "GooglePlacesAutocompletor.h"
 #import "GooglePlace.h"
+#import "GooglePlacesSearcher.h"
 
 @interface HomeViewController () <UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) IBOutlet UISegmentedControl *driveWalkSegmentedControl;
@@ -32,6 +33,18 @@
 {
     self.isInDrivingMode = YES;
     self.destinationsArray = [NSMutableArray array];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide) name:UIKeyboardDidHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow) name:UIKeyboardDidShowNotification object:nil];
+}
+
+-(void)keyboardDidHide
+{
+    NSLog(@"kb hide");
+}
+
+-(void)keyboardDidShow
+{
+    NSLog(@"kb show");
 }
 
 - (IBAction)driveWalkSegmentedControlChanged:(id)sender
@@ -83,8 +96,10 @@
     NSString *currentInputString = [textField.text stringByAppendingString:string];
     if (currentInputString.length < 1) {
         // nothing entered
+        self.destinationsTable.hidden = YES;
     } else if (currentInputString.length < 2) {
         // not enough entered to search yet
+        self.destinationsTable.hidden = YES;
     } else if (currentInputString.length > 2 && [textField isEqual:self.myDestinationField] && MY_APP_DELEGATE.lat != 0) {
         // now do an autocomplete search
         [GooglePlacesAutocompletor searchTerm:currentInputString
@@ -99,7 +114,7 @@
                      GooglePlace *place = [[GooglePlace alloc] init];
                      place.placeID = result[@"id"];
                      place.placeTitle = result[@"description"];
-//                     NSLog(@"reference:%@", result[@"reference"]);
+                     place.placeReference = result[@"reference"];
 //                     NSLog(@"terms:%@", result[@"terms"][0][@"value"]);
                      // add place to local array of places unless it exists
                      if (self.destinationsArray.count > 0) {
@@ -117,8 +132,11 @@
                      }
                      dispatch_async(dispatch_get_main_queue(), ^{
                          [self.destinationsTable reloadData];
+                         self.destinationsTable.hidden = NO;
                      });
                  }
+             } else {
+                 self.destinationsTable.hidden = YES;
              }
          } failure:^(NSError *error) {
              NSLog(@"autocompletor error: %@", error.localizedDescription);
@@ -142,6 +160,12 @@
 }
 
 #pragma mark - View Controller Lifecycle
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.destinationsTable.hidden = YES;
+}
 
 - (void)viewDidLoad
 {
@@ -237,7 +261,19 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     GooglePlace *selectedPlace = (GooglePlace*)self.destinationsArray[indexPath.row];
     NSLog(@"you selected %@", selectedPlace.placeTitle);
-    
+    [GooglePlacesSearcher getGooglePlaceByReference:selectedPlace.placeReference
+                                            success:
+     ^(GooglePlace *gPlace) {
+         NSLog(@"here it is:\n%@", gPlace);
+         dispatch_async(dispatch_get_main_queue(), ^{
+             self.destinationsTable.hidden = YES;
+             self.myDestinationField.text = gPlace.placeAddress;
+             [self.myDestinationField resignFirstResponder];
+             [self.myLocationField resignFirstResponder];
+         });
+     } failure:^(NSError *error) {
+         NSLog(@"error:%@", error);
+     }];
 }
 
 #pragma mark - Properties

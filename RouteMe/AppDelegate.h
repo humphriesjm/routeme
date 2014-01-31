@@ -21,6 +21,7 @@
 #define END_LNG @(-78.614673)
 
 #define GOOGLE_PLACES_API_BASE_URL @"https://maps.googleapis.com/maps/api/place/nearbysearch/json"
+#define GOOGLE_PLACES_DETAILS_BASE_URL @"https://maps.googleapis.com/maps/api/place/details/json"
 #define GOOGLE_DIRECTIONS_API_BASE_URL @"http://maps.googleapis.com/maps/api/directions/json?"
 #define GOOGLE_PLACES_AUTOCOMPLETE_API_BASE_URL @"https://maps.googleapis.com/maps/api/place/autocomplete/json"
 

@@ -7,6 +7,8 @@
 //
 
 #import "GooglePlacesSearcher.h"
+#import "Flurry.h"
+#import "GooglePlace.h"
 
 @implementation GooglePlacesSearcher
 
@@ -23,6 +25,7 @@
     NSString *locationString = [NSString stringWithFormat:@"%f,%f", lat, lng];
     NSString *paramsString = [NSString stringWithFormat:@"%@?location=%@&radius=%f&keyword=%@&sensor=false&key=%@", GOOGLE_PLACES_API_BASE_URL, locationString, radius, term, GOOGLE_PLACES_API_KEY];
     NSLog(@"-=-=GOOGLE PLACES API SEARCH TICK=-=-");
+    [Flurry logEvent:@"GOOGLE PLACES API SEARCH"];
     [manager GET:paramsString
       parameters:nil
          success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -37,6 +40,37 @@
                  if (success) success(placesResultsDict[@"results"]);
              } else {
                  NSLog(@"no results");
+                 if (success) success(nil);
+             }
+         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+             NSLog(@"error:%@", error);
+             if (failure) failure(error);
+         }];
+}
+
++(void)getGooglePlaceByReference:(NSString *)placeReference
+                         success:(void (^)(GooglePlace *))success
+                         failure:(void (^)(NSError *))failure
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
+    manager.requestSerializer = [AFJSONRequestSerializer serializerWithWritingOptions:NSJSONWritingPrettyPrinted];
+    NSString *paramsString = [NSString stringWithFormat:@"%@?reference=%@&sensor=false&key=%@", GOOGLE_PLACES_DETAILS_BASE_URL, placeReference, GOOGLE_PLACES_API_KEY];
+    NSLog(@"-=-=GOOGLE PLACES DETAILS API SEARCH TICK=-=-");
+    [Flurry logEvent:@"GOOGLE PLACES DETAILS API SEARCH"];
+    [manager GET:paramsString
+      parameters:nil
+         success:^(AFHTTPRequestOperation *operation, id responseObject) {
+             NSDictionary *placesResultsDict = (NSDictionary*)responseObject;
+             NSString *status = placesResultsDict[@"status"];
+             if ([status isEqualToString:@"ZERO_RESULTS"]) {
+                 NSLog(@"ZERO RESULTS");
+                 if (success) success(nil);
+             } else if (placesResultsDict[@"result"]) {
+                 GooglePlace *newPlace = [GooglePlace buildPlaceWithPlaceDetailResult:placesResultsDict[@"result"]];
+                 if (success) success(newPlace);
+             } else {
+                 NSLog(@"no result");
                  if (success) success(nil);
              }
          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
