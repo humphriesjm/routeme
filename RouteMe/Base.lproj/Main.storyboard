@@ -152,7 +152,7 @@
                     <navigationItem key="navigationItem" title="Map" id="2HU-PK-NvI">
                         <barButtonItem key="rightBarButtonItem" title="List" id="5wI-4T-SxU">
                             <connections>
-                                <action selector="leftBBIAction:" destination="vXZ-lx-hvc" id="Ji5-Fh-ixm"/>
+                                <action selector="listBBIAction:" destination="vXZ-lx-hvc" id="zLW-Ii-Ccg"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
