@@ -1,1 +1,5 @@
-Starting point for an iOS project that uses the Google Maps iOS SDK and gets directions.
+#RouteMe
+
+RouteMe is an iOS app that shows you places of interest on a route.
+
+&copy; 2014 RouteMe, LLC. All rights reserved.
