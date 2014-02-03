@@ -138,17 +138,24 @@
                         <viewControllerLayoutGuide type="bottom" id="WAK-IV-SFc"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="6yU-b1-fIr">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="6yU-b1-fIr">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="6yU-b1-fIr" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="NrZ-nX-oTZ"/>
+                            <constraint firstAttribute="trailing" secondItem="6yU-b1-fIr" secondAttribute="trailing" id="ank-VT-hET"/>
+                            <constraint firstItem="WAK-IV-SFc" firstAttribute="top" secondItem="6yU-b1-fIr" secondAttribute="bottom" id="cbb-Mg-8IR"/>
+                            <constraint firstItem="6yU-b1-fIr" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="lO5-Ki-E9c"/>
+                        </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="Map" id="2HU-PK-NvI">
                         <barButtonItem key="rightBarButtonItem" title="List" id="5wI-4T-SxU">
                             <connections>
@@ -159,11 +166,51 @@
                     <connections>
                         <outlet property="leftBBI" destination="5wI-4T-SxU" id="Rxf-Wc-g3x"/>
                         <outlet property="tableView" destination="6yU-b1-fIr" id="cEO-Sm-Kpl"/>
+                        <segue destination="kMD-oi-GDX" kind="push" identifier="placeDetailSegue" id="UPk-X3-dDu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="439" y="131"/>
+            <point key="canvasLocation" x="499" y="131"/>
+        </scene>
+        <!--Place Detail View Controller - Place Detail-->
+        <scene sceneID="14h-Eo-aZP">
+            <objects>
+                <viewController storyboardIdentifier="detailVC" id="kMD-oi-GDX" customClass="PlaceDetailViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="5Qe-uK-UoU"/>
+                        <viewControllerLayoutGuide type="bottom" id="G7F-xF-sYp"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ccq-Pz-8Hf">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Place Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="vh4-MA-4JM">
+                                <rect key="frame" x="20" y="84" width="280" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="US7-Sd-cGJ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="vh4-MA-4JM" firstAttribute="leading" secondItem="Ccq-Pz-8Hf" secondAttribute="leading" constant="20" id="2ei-PN-9sk"/>
+                            <constraint firstItem="vh4-MA-4JM" firstAttribute="top" secondItem="5Qe-uK-UoU" secondAttribute="bottom" constant="20" id="GQj-R2-fYO"/>
+                            <constraint firstAttribute="trailing" secondItem="vh4-MA-4JM" secondAttribute="trailing" constant="20" id="UTk-5L-BEt"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Place Detail" id="Fd1-es-Vba"/>
+                    <connections>
+                        <outlet property="placeNameLabel" destination="vh4-MA-4JM" id="lKt-WK-DIH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EJA-24-z9T" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="927" y="131"/>
         </scene>
         <!--Search Places View Controller - Search-->
         <scene sceneID="ixR-WM-5D5">

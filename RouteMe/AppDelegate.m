@@ -8,29 +8,44 @@
 
 #import "AppDelegate.h"
 #import "Flurry.h"
+#import "GooglePlace.h"
+
+@interface AppDelegate ()
+@property (strong, nonatomic) NSTimer *locationTimer;
+@end
 
 @implementation AppDelegate
 
--(CLLocation *)currentLocation
-{
-    return [[CLLocation alloc] initWithLatitude:self.lat longitude:self.lng];
-}
+//-(CLLocation *)currentLocation
+//{
+//    return [[CLLocation alloc] initWithLatitude:self.lat longitude:self.lng];
+//}
 
 -(void)locationManager:(CLLocationManager *)manager
     didUpdateLocations:(NSArray *)locations
 {
-    NSLog(@"location update");
     self.numberOfLocationUpdates += 1;
-    self.lastLocationUpdate = [NSDate date];
     CLLocation *lastLocation = [locations firstObject];
-    NSDate *now = [NSDate date];
-    float timeDiff = [now timeIntervalSinceDate:self.lastLocationUpdate];
-    NSLog(@"time diff:%f", timeDiff*60.f);
-    if (self.numberOfLocationUpdates >= 5 || lastLocation.horizontalAccuracy < 100) {
-        self.lat = lastLocation.coordinate.latitude;
-        self.lng = lastLocation.coordinate.longitude;
+    MY_APP_DELEGATE.currentLocation = lastLocation;
+    self.lat = lastLocation.coordinate.latitude;
+    self.lng = lastLocation.coordinate.longitude;
+    NSLog(@"location acc:(%f)", lastLocation.horizontalAccuracy);
+    if (self.numberOfLocationUpdates >= 5 || lastLocation.horizontalAccuracy < 160) {
+        [self.locationTimer invalidate];
+        self.locationTimer = nil;
         [self.locationManager stopUpdatingLocation];
         [[NSNotificationCenter defaultCenter] postNotificationName:LOCATION_UPDATE_NOTIFICATION object:lastLocation];
+    }
+}
+
+-(void)forceLocationUpdate
+{
+    if (MY_APP_DELEGATE.currentLocation && [CLLocationManager locationServicesEnabled]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:LOCATION_UPDATE_NOTIFICATION object:MY_APP_DELEGATE.currentLocation];
+        [self.locationManager stopUpdatingLocation];
+    } else {
+        NSLog(@"forceLocationUpdate FAIL");
+        [self startForceLocationTimer];
     }
 }
 
@@ -49,15 +64,27 @@
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
     [self.locationManager startUpdatingLocation];
+    [self startForceLocationTimer];
     
     return YES;
+}
+
+#define SECONDS_TO_WAIT_TO_FORCE_LOCATION_UPDATE 5
+
+-(void)startForceLocationTimer
+{
+    self.locationTimer = [NSTimer scheduledTimerWithTimeInterval:SECONDS_TO_WAIT_TO_FORCE_LOCATION_UPDATE
+                                                          target:self
+                                                        selector:@selector(forceLocationUpdate)
+                                                        userInfo:nil
+                                                         repeats:NO];
 }
 
 -(BOOL)mainPlacesContainsPlaceWithID:(NSString*)placeID
 {
     NSArray *mainPlacesArrayCopy = [self.mainPlacesArray copy];
-    for (NSDictionary *currentPlaceDict in mainPlacesArrayCopy) {
-        if ([currentPlaceDict[@"id"] isEqualToString:placeID]) {
+    for (GooglePlace *currentGPlace in mainPlacesArrayCopy) {
+        if ([currentGPlace.placeID isEqualToString:placeID]) {
             return YES;
         }
     }

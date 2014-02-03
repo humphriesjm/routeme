@@ -45,10 +45,8 @@
 //    NSLog(@"notif: %@", notif);
     if ([notif.object isKindOfClass:[CLLocation class]]) {
         CLLocation *newLocation = (CLLocation*)notif.object;
-        [self.locationAI stopAnimating];
         [self reverseGeocodeLocationForString:MY_APP_DELEGATE.currentLocation];
         MY_APP_DELEGATE.startingLocation = newLocation;
-        self.startLocationCheckImage.hidden = NO;
     }
 }
 
@@ -242,7 +240,10 @@
             if (placemark) {
                 NSString *addr = [placemark.addressDictionary objectForKey:(NSString*)kABPersonAddressStreetKey];
                 NSString *city = [placemark.addressDictionary objectForKey:(NSString*)kABPersonAddressCityKey];
+                [self.locationAI stopAnimating];
+                self.startLocationCheckImage.hidden = NO;
                 self.currentLocationString = [NSString stringWithFormat:@"%@ %@", addr, city];
+                NSLog(@"reverseGeocodeLocationForString:%@", self.currentLocationString);
                 self.myLocationField.text = self.currentLocationString;
             }
         }];

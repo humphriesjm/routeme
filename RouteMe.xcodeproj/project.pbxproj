@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		965D429A189C22D90071D80E /* libFlurry_4.3.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 965D4299189C22D90071D80E /* libFlurry_4.3.1.a */; };
 		965D429C189C23610071D80E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 965D429B189C23610071D80E /* Security.framework */; };
+		965D429F189EC6490071D80E /* PlaceDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 965D429E189EC6490071D80E /* PlaceDetailViewController.m */; };
 		967779111889D2AE007596BA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 967779101889D2AE007596BA /* Foundation.framework */; };
 		967779131889D2AE007596BA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 967779121889D2AE007596BA /* CoreGraphics.framework */; };
 		967779151889D2AE007596BA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 967779141889D2AE007596BA /* UIKit.framework */; };
@@ -71,6 +72,8 @@
 		965D4298189C22D90071D80E /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
 		965D4299189C22D90071D80E /* libFlurry_4.3.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_4.3.1.a; sourceTree = "<group>"; };
 		965D429B189C23610071D80E /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		965D429D189EC6490071D80E /* PlaceDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceDetailViewController.h; sourceTree = "<group>"; };
+		965D429E189EC6490071D80E /* PlaceDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceDetailViewController.m; sourceTree = "<group>"; };
 		9677790D1889D2AE007596BA /* RouteMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RouteMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		967779101889D2AE007596BA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		967779121889D2AE007596BA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -301,6 +304,8 @@
 		9677794A1889D30B007596BA /* controllers */ = {
 			isa = PBXGroup;
 			children = (
+				965D429D189EC6490071D80E /* PlaceDetailViewController.h */,
+				965D429E189EC6490071D80E /* PlaceDetailViewController.m */,
 				9677799E188EB07B007596BA /* HomeViewController.h */,
 				9677799F188EB07B007596BA /* HomeViewController.m */,
 				96777991188A19C4007596BA /* SearchPlacesViewController.h */,
@@ -472,6 +477,7 @@
 				967779211889D2AF007596BA /* AppDelegate.m in Sources */,
 				9677796C1889E4B5007596BA /* MDDirectionService.m in Sources */,
 				96777989188A18A0007596BA /* AFHTTPRequestOperationManager.m in Sources */,
+				965D429F189EC6490071D80E /* PlaceDetailViewController.m in Sources */,
 				9677798C188A18A0007596BA /* AFSecurityPolicy.m in Sources */,
 				96F45546189B714600C81BD7 /* RMRoute.m in Sources */,
 				9677791D1889D2AF007596BA /* main.m in Sources */,
