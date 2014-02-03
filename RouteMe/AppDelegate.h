@@ -27,6 +27,8 @@
 
 #define FLURRY_DEV_TOKEN @"WVM5S4ZTV3T8TVVTKPSF"
 
+#define TEST_FLIGHT_TOKEN @"3db8aa69-86de-4235-b733-8926fd93ed33"
+
 #define MY_APP_DELEGATE ((AppDelegate *)[UIApplication sharedApplication].delegate)
 
 #define LOCATION_UPDATE_NOTIFICATION @"LocationUpdateNotification"

@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "Flurry.h"
+#import "TestFlight.h"
 #import "GooglePlace.h"
 
 @interface AppDelegate ()
@@ -59,6 +60,7 @@
     
 //    [Flurry setCrashReportingEnabled:YES];
     [Flurry startSession:FLURRY_DEV_TOKEN];
+    [TestFlight takeOff:TEST_FLIGHT_TOKEN];
     [GMSServices provideAPIKey:GOOGLE_MAPS_API_KEY];
     
     self.locationManager = [[CLLocationManager alloc] init];

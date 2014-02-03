@@ -10,6 +10,7 @@
 		965D429A189C22D90071D80E /* libFlurry_4.3.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 965D4299189C22D90071D80E /* libFlurry_4.3.1.a */; };
 		965D429C189C23610071D80E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 965D429B189C23610071D80E /* Security.framework */; };
 		965D429F189EC6490071D80E /* PlaceDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 965D429E189EC6490071D80E /* PlaceDetailViewController.m */; };
+		967629B918A025670004BB52 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 967629B518A025670004BB52 /* libTestFlight.a */; };
 		967779111889D2AE007596BA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 967779101889D2AE007596BA /* Foundation.framework */; };
 		967779131889D2AE007596BA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 967779121889D2AE007596BA /* CoreGraphics.framework */; };
 		967779151889D2AE007596BA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 967779141889D2AE007596BA /* UIKit.framework */; };
@@ -74,6 +75,10 @@
 		965D429B189C23610071D80E /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		965D429D189EC6490071D80E /* PlaceDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceDetailViewController.h; sourceTree = "<group>"; };
 		965D429E189EC6490071D80E /* PlaceDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceDetailViewController.m; sourceTree = "<group>"; };
+		967629B518A025670004BB52 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
+		967629B618A025670004BB52 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
+		967629B718A025670004BB52 /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
+		967629B818A025670004BB52 /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
 		9677790D1889D2AE007596BA /* RouteMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RouteMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		967779101889D2AE007596BA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		967779121889D2AE007596BA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -165,6 +170,7 @@
 				967779551889D470007596BA /* AVFoundation.framework in Frameworks */,
 				967779511889D441007596BA /* GoogleMaps.framework in Frameworks */,
 				967779481889D2EC007596BA /* MapKit.framework in Frameworks */,
+				967629B918A025670004BB52 /* libTestFlight.a in Frameworks */,
 				967779461889D2E6007596BA /* CoreLocation.framework in Frameworks */,
 				967779131889D2AE007596BA /* CoreGraphics.framework in Frameworks */,
 				967779151889D2AE007596BA /* UIKit.framework in Frameworks */,
@@ -192,6 +198,17 @@
 				965D4299189C22D90071D80E /* libFlurry_4.3.1.a */,
 			);
 			path = Flurry;
+			sourceTree = "<group>";
+		};
+		967629B418A0255C0004BB52 /* TestFlight */ = {
+			isa = PBXGroup;
+			children = (
+				967629B518A025670004BB52 /* libTestFlight.a */,
+				967629B618A025670004BB52 /* TestFlight.h */,
+				967629B718A025670004BB52 /* TestFlight+AsyncLogging.h */,
+				967629B818A025670004BB52 /* TestFlight+ManualSessions.h */,
+			);
+			name = TestFlight;
 			sourceTree = "<group>";
 		};
 		967779041889D2AE007596BA = {
@@ -243,6 +260,7 @@
 		967779161889D2AE007596BA /* RouteMe */ = {
 			isa = PBXGroup;
 			children = (
+				967629B418A0255C0004BB52 /* TestFlight */,
 				965D4297189C22D90071D80E /* Flurry */,
 				9677799D188C0EE9007596BA /* models */,
 				96777974188A18A0007596BA /* AFNetworking */,
@@ -549,6 +567,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jason Humphries (QJG2V45VXS)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -589,6 +608,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jason Humphries (QJG2V45VXS)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -611,7 +631,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jason Humphries (Q4J5Y9XJ62)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jason Humphries (Q4J5Y9XJ62)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/jason/Desktop/Dev/AdamCohen/RouteMe,
@@ -622,8 +643,10 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/jason/Desktop/Dev/AdamCohen/RouteMe/RouteMe/Flurry,
+					/Users/jason/Desktop/Dev/AdamCohen/routeme/RouteMe,
 				);
 				PRODUCT_NAME = RouteMe;
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -633,7 +656,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jason Humphries (Q4J5Y9XJ62)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jason Humphries (Q4J5Y9XJ62)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/jason/Desktop/Dev/AdamCohen/RouteMe,
@@ -644,8 +668,10 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/jason/Desktop/Dev/AdamCohen/RouteMe/RouteMe/Flurry,
+					/Users/jason/Desktop/Dev/AdamCohen/routeme/RouteMe,
 				);
 				PRODUCT_NAME = RouteMe;
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
