@@ -9,6 +9,8 @@
 #import "MDDirectionService.h"
 #import "AppDelegate.h"
 #import "Flurry.h"
+#import "GooglePlace.h"
+#import "RMRoute.h"
 
 @interface MDDirectionService()
 @property (assign, nonatomic) BOOL sensor;
@@ -25,7 +27,7 @@
 {
     NSArray *waypoints = query[@"waypoints"];
     NSString *origin = waypoints[0];
-    int waypointCount = [waypoints count];
+    int waypointCount = (int)[waypoints count];
     int destinationPos = waypointCount - 1;
     NSString *destination = waypoints[destinationPos];
     NSString *sensor = query[@"sensor"];
@@ -67,6 +69,15 @@
                                      error:&error];
   [delegate performSelector:selector
                  withObject:json];
+}
+
+#pragma FETCH DIRECTIONS
+
++(RMRoute *)fetchDirectionsFrom:(GooglePlace *)startingPlace
+                             to:(GooglePlace *)endingPlace
+{
+    RMRoute *route = [[RMRoute alloc] init];
+    return route;
 }
 
 @end

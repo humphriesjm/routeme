@@ -8,9 +8,14 @@
 
 #import "PlaceDetailViewController.h"
 #import "GooglePlace.h"
+#import "AppDelegate.h"
 
 @interface PlaceDetailViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *placeNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *distanceDeltaLabel;
+@property (weak, nonatomic) IBOutlet UILabel *timeDeltaLabel;
+@property (weak, nonatomic) IBOutlet UILabel *mainRouteDistanceLabel;
+@property (weak, nonatomic) IBOutlet UILabel *mainRouteTimeLabel;
 
 @end
 
@@ -25,6 +30,9 @@
 {
     [super viewWillAppear:animated];
     self.placeNameLabel.text = self.thisPlace.placeTitle;
+    
+    self.mainRouteDistanceLabel.text = [NSString stringWithFormat:@"%f meters", MY_APP_DELEGATE.totalDistanceForMainRoute];
+    self.mainRouteTimeLabel.text = [NSString stringWithFormat:@"%f seconds", MY_APP_DELEGATE.totalTimeForMainRoute];
 }
 
 

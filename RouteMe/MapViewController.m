@@ -18,6 +18,7 @@
 @property (strong, nonatomic) NSMutableArray *waypointStrings;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *leftBBI;
 @property (strong, nonatomic) GMSPath *mainPath;
+@property (strong, nonatomic) GMSPath *staticPath;
 @end
 
 @implementation MapViewController
@@ -59,6 +60,7 @@
     
 //    [self placePopupMarker];
     [self placeWaypoints];
+    [self plotDirectionsForStaticRoute];
     
     // table
     self.tableView.delegate = self;
@@ -129,6 +131,35 @@
 //    GMSMarker *tapMarker = [GMSMarker markerWithPosition:tapPosition];
 }
 
+-(void)plotDirectionsForStaticRoute
+{
+    float startLat = [START_LAT floatValue];
+    float startLng = [START_LNG floatValue];
+    float endLat = [END_LAT floatValue];
+    float endLng = [END_LNG floatValue];
+    CLLocationCoordinate2D startPosition = CLLocationCoordinate2DMake(startLat, startLng);
+    CLLocationCoordinate2D endPosition = CLLocationCoordinate2DMake(endLat, endLng);
+    
+    GMSMarker *startMarker = [GMSMarker markerWithPosition:startPosition];
+    GMSMarker *endMarker = [GMSMarker markerWithPosition:endPosition];
+    startMarker.map = self.mapView;
+    endMarker.map = self.mapView;
+    [self.waypoints addObject:startMarker];
+    [self.waypoints addObject:endMarker];
+    
+    NSString *startPositionString = [NSString stringWithFormat:@"%f,%f", startLat, startLng];
+    NSString *endPositionString = [NSString stringWithFormat:@"%f,%f", endLat, endLng];
+    [self.waypointStrings addObject:startPositionString];
+    [self.waypointStrings addObject:endPositionString];
+    NSDictionary *query = @{ @"sensor" : @"false",
+                             @"waypoints" : self.waypointStrings };
+    MDDirectionService *mds = [[MDDirectionService alloc] init];
+    SEL selector = @selector(addStaticRouteDirections:);
+    [mds setDirectionsQuery:query
+               withSelector:selector
+               withDelegate:self];
+}
+
 #define NUMBER_OF_SEARCHES_DIVISOR 10.0
 
 -(void)addDirections:(NSDictionary *)json
@@ -139,6 +170,7 @@
         NSArray *firstRouteLegs = firstRoute[@"legs"];
         // distance on path in meters
         float totalDistanceValue = [firstRouteLegs[0][@"distance"][@"value"] floatValue];
+        float totalTimeValue = [firstRouteLegs[0][@"duration"][@"value"] floatValue];
         NSDictionary *routeOverviewPolyline = firstRoute[@"overview_polyline"];
         NSString *overview_route = routeOverviewPolyline[@"points"];
         self.mainPath = [GMSPath pathFromEncodedPath:overview_route];
@@ -146,7 +178,10 @@
         int numberOfPoints = self.mainPath.count;
         // number of searhes to perform along the path
         int numberOfSearches = (int)floor((numberOfPoints/NUMBER_OF_SEARCHES_DIVISOR));
-        NSLog(@"totalDistance: %f", totalDistanceValue);
+        NSLog(@"totalDistance: %f meters", totalDistanceValue);
+        NSLog(@"totalTimeValue: %f seconds", totalTimeValue);
+        MY_APP_DELEGATE.totalDistanceForMainRoute = totalDistanceValue;
+        MY_APP_DELEGATE.totalTimeForMainRoute = totalTimeValue;
         NSLog(@"numberOfPoints: %d", numberOfPoints);
         NSLog(@"numberOfSearches: %d", numberOfSearches);
         for (int j=0; j < numberOfSearches; j++) {
@@ -180,6 +215,35 @@
         GMSPolyline *polyline = [GMSPolyline polylineWithPath:self.mainPath];
         polyline.strokeWidth = 8.f;
         polyline.strokeColor = [UIColor blueColor];
+        polyline.map = self.mapView;
+    }
+}
+
+-(void)addStaticRouteDirections:(NSDictionary *)json
+{
+    if ([json[@"routes"] count] > 0) {
+        NSDictionary *firstRoute = json[@"routes"][0];
+        NSArray *firstRouteLegs = firstRoute[@"legs"];
+        
+        // distance on path in meters
+        float totalDistanceValue = [firstRouteLegs[0][@"distance"][@"value"] floatValue];
+        // distance on path in miles
+        NSString *totalDistanceMiles = firstRouteLegs[0][@"distance"][@"text"];
+        // time on path in seconds
+        float totalTimeValue = [firstRouteLegs[0][@"duration"][@"value"] floatValue];
+        // time on path in string format
+        NSString *totalTimeMinutes = firstRouteLegs[0][@"duration"][@"text"];
+        
+        NSDictionary *routeOverviewPolyline = firstRoute[@"overview_polyline"];
+        NSString *overview_route = routeOverviewPolyline[@"points"];
+        self.staticPath = [GMSPath pathFromEncodedPath:overview_route];
+        NSLog(@"totalDistance in meters(STATIC): %f", totalDistanceValue);
+        NSLog(@"totalDistance in string(STATIC): %@", totalDistanceMiles);
+        NSLog(@"totalTime in seconds(STATIC): %f", totalTimeValue);
+        NSLog(@"totalTime in string(STATIC): %@", totalTimeMinutes);
+        GMSPolyline *polyline = [GMSPolyline polylineWithPath:self.staticPath];
+        polyline.strokeWidth = 8.f;
+        polyline.strokeColor = [UIColor redColor];
         polyline.map = self.mapView;
     }
 }

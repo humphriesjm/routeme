@@ -17,11 +17,6 @@
 
 @implementation AppDelegate
 
-//-(CLLocation *)currentLocation
-//{
-//    return [[CLLocation alloc] initWithLatitude:self.lat longitude:self.lng];
-//}
-
 -(void)locationManager:(CLLocationManager *)manager
     didUpdateLocations:(NSArray *)locations
 {
@@ -45,7 +40,7 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:LOCATION_UPDATE_NOTIFICATION object:MY_APP_DELEGATE.currentLocation];
         [self.locationManager stopUpdatingLocation];
     } else {
-        NSLog(@"forceLocationUpdate FAIL");
+        NSLog(@"forceLocationUpdate FAIL (loc:%@)", MY_APP_DELEGATE.currentLocation);
         [self startForceLocationTimer];
     }
 }

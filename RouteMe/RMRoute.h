@@ -18,4 +18,8 @@
 @property (strong, nonatomic) GooglePlace *endingLocation;
 @property (strong, nonatomic) NSArray *waypoints;
 
+@property (strong, nonatomic) NSMutableArray *routePlacesArray;
+@property (assign, nonatomic) float routeTotalDistance;
+@property (assign, nonatomic) float routeTotalTime;
+
 @end
